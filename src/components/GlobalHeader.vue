@@ -1,5 +1,5 @@
 <template>
-  <a-layout-header class="header">
+  <div class="header-container">
     <a-row type="flex" align="middle" justify="space-between" style="height: 100%;">
       <!-- 左侧 Logo -->
       <a-col>
@@ -9,7 +9,7 @@
       </a-col>
 
       <!-- 右侧用户信息 -->
-      <a-col v-if="userInfo">
+      <a-col v-if="userInfo?.student_number !== '空学号'">
         <a-dropdown placement="bottomRight">
           <template #overlay>
             <a-menu style="width: 8em;" @click="handleMenuClick">
@@ -22,42 +22,43 @@
               </a-menu-item>
             </a-menu>
           </template>
-          <div class="user-info" style="cursor: pointer;">
-            <a-avatar :src="userInfo.avatar || defaultAvatar" />
-            <span style="margin-left: 8px;">{{ userInfo.name }}</span>
+          <div class="user-info" style="cursor: pointer;color: #fff;">
+            <!-- <a-avatar :src="userInfo?.avatar || defaultAvatar" /> -->
+            <span style="margin-left: 8px;">{{ userInfo.student_number }}</span>
             <DownOutlined style="margin-left: 4px; font-size: 12px;" />
           </div>
         </a-dropdown>
       </a-col>
     </a-row>
-  </a-layout-header>
+  </div>
 </template>
 
 <script lang="ts" setup>
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, computed } from 'vue'
 import { useRouter } from 'vue-router'
-import { Layout, Row, Col, Dropdown, Menu, Avatar, Icon } from 'ant-design-vue'
+import { Layout, Row, Col, Dropdown, Menu, Avatar, Icon, message } from 'ant-design-vue'
 import { UserOutlined, LogoutOutlined, DownOutlined } from '@ant-design/icons-vue'
 import { useLoginStudentStore } from '@/stores/useLoginStudentStore'
 
 const { Header } = Layout
 const router = useRouter()
 const loginStore = useLoginStudentStore()
-const userInfo = ref<any>(null)
+const userInfo = computed(() => loginStore.loginStudents)
 const defaultAvatar = 'https://gw.alipayobjects.com/zos/rmsportal/BiazfanxmamNRoxxVxka.png'
 
-onMounted(() => {
-  // 获取用户信息，实际项目中应该从store或API获取
-  userInfo.value = loginStore.loginStudents
-  console.log('userInfo', userInfo.value)
-})
+// 用户信息通过computed从store实时获取，无需onMounted初始化
 
 const handleMenuClick = (e: any) => {
   if (e.key === 'logout') {
-    loginStore.logout()
-    router.push('/login')
+    const res = loginStore.logoutLoginStudents()
+    if (res.success) {
+      message.success('退出登录成功')
+      router.push('/')
+    } else {
+      message.error('退出登录失败')
+    }
   } else if (e.key === 'userInfo') {
-    router.push('/user/profile')
+    router.push('/student/info')
   }
 }
 </script>
@@ -65,11 +66,10 @@ const handleMenuClick = (e: any) => {
 
 
 <style scoped>
-.header {
+.header-container {
   background: #001529;
-  padding: 0 24px;
   box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);
-  position: fixed;
+  /* position: fixed; */
   width: 100%;
   z-index: 10;
 }
@@ -85,7 +85,7 @@ const handleMenuClick = (e: any) => {
 
 .user-info {
   display: flex;
-  width: 6em;
+  padding: 0 1em;
   align-items: center;
   color: rgba(0, 0, 0, 0.85);
   font-size: 14px;

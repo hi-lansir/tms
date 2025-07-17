@@ -1,5 +1,5 @@
 <template>
-  <div id="studentSider">
+  <div id="staffSider">
     <a-layout style="height: 100%">
       <a-layout-sider width="200" style="height: 100%">
         <!-- 侧边栏内容 -->
@@ -32,7 +32,7 @@
 
 <script lang="ts" setup>
 import { ref } from 'vue';
-import { HomeOutlined, UserOutlined, AlignLeftOutlined, EditOutlined, SettingFilled } from '@ant-design/icons-vue';
+import { HomeOutlined, UserOutlined, TeamOutlined, BookOutlined, FileTextOutlined, SettingFilled } from '@ant-design/icons-vue';
 
 const selectedKeys = ref(['1']);
 
@@ -42,57 +42,53 @@ const menuItems = [
     key: '1',
     icon: HomeOutlined,
     label: '首页',
-    path: '/student'
+    path: '/staff'
   },
   {
     key: '2',
-    icon: SettingFilled,
-    label: '设置',
-    path: '/student'
+    icon: TeamOutlined,
+    label: '学生管理',
+    path: '/staff/students',
+    children: [
+      { key: '2-1', label: '学生列表', path: '/staff/students/list' },
+      { key: '2-2', label: '成绩管理', path: '/staff/students/grades' },
+      { key: '2-3', label: '考勤记录', path: '/staff/students/attendance' }
+    ]
   },
   {
     key: '3',
-    icon: AlignLeftOutlined,
-    label: '课程',
-    path: '/student/courses',
+    icon: BookOutlined,
+    label: '课程管理',
+    path: '/staff/courses',
     children: [
-      { key: '3-1', label: '课程列表', path: '/student/courses' },
-      { key: '3-2', label: '我的课程', path: '/student/courses/user' }
+      { key: '3-1', label: '课程列表', path: '/staff/courses/list' },
+      { key: '3-2', label: '课程创建', path: '/staff/courses/create' },
+      { key: '3-3', label: '教学资源', path: '/staff/courses/resources' }
     ]
   },
   {
     key: '4',
-    icon: EditOutlined,
-    label: '练习与考核',
-    path: '/student/exams',
-    children: [
-      { key: '4-1', label: '考试安排', path: '/student/exams/schedule' },
-      { key: '4-2', label: '我的成绩', path: '/student/exams/results' }
-    ]
+    icon: FileTextOutlined,
+    label: '作业管理',
+    path: '/staff/assignments'
   },
   {
     key: '5',
-    icon: EditOutlined,
-    label: '知识与资源',
-    path: '/student'
+    icon: FileTextOutlined,
+    label: '考试管理',
+    path: '/staff/exams'
   },
   {
     key: '6',
-    icon: UserOutlined,
-    label: '讨论互动',
-    path: '/student'
-  },
-  {
-    key: '7',
-    icon: UserOutlined,
-    label: '个人中心',
-    path: '/student'
-  },
+    icon: SettingFilled,
+    label: '系统设置',
+    path: '/staff/settings'
+  }
 ];
 </script>
 
 <style scoped>
-#studentSider {
+#staffSider {
   width: 100%;
   height: 100%;
 }

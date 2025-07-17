@@ -2,17 +2,20 @@
 /* eslint-disable */
 import request from '@/request'
 
-/** 此处后端没有提供注释 POST /staff/get/login */
-export async function getLoginStaff(options?: { [key: string]: any }) {
-  return request<API.BaseResponseLoginStaffVO>('/staff/get/login', {
+/** getLoginStaff POST /api/staff/get/login */
+export async function getLoginStaffUsingPost(options?: { [key: string]: any }) {
+  return request<API.BaseResponseLoginStaffVO>('/api/staff/get/login', {
     method: 'POST',
     ...(options || {}),
   })
 }
 
-/** 此处后端没有提供注释 POST /staff/login */
-export async function staffLogin(body: API.StaffLoginRequest, options?: { [key: string]: any }) {
-  return request<API.BaseResponseLoginStaffVO>('/staff/login', {
+/** staffLogin POST /api/staff/login */
+export async function staffLoginUsingPost(
+  body: API.StaffLoginRequest,
+  options?: { [key: string]: any }
+) {
+  return request<API.BaseResponseLoginStaffVO>('/api/staff/login', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -22,12 +25,20 @@ export async function staffLogin(body: API.StaffLoginRequest, options?: { [key: 
   })
 }
 
-/** 此处后端没有提供注释 POST /staff/register */
-export async function staffRegister(
+/** logout POST /api/staff/logout */
+export async function logoutUsingPost(options?: { [key: string]: any }) {
+  return request<API.BaseResponseboolean>('/api/staff/logout', {
+    method: 'POST',
+    ...(options || {}),
+  })
+}
+
+/** staffRegister POST /api/staff/register */
+export async function staffRegisterUsingPost(
   body: API.StaffRegisterRequest,
   options?: { [key: string]: any }
 ) {
-  return request<API.BaseResponseInteger>('/staff/register', {
+  return request<API.BaseResponseint>('/api/staff/register', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

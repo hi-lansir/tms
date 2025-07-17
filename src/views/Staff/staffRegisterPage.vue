@@ -1,10 +1,10 @@
 <template>
-  <a-card id="userRegisterPage">
-    <h2 class="title">学生注册</h2>
+  <a-card id="staffRegisterPage">
+    <h2 class="title">教职工注册</h2>
     <div class="desc">教学与仿真实训平台</div>
     <a-form :model="formState" name="basic" autocomplete="off" :label-col="labelCol" @finish="handleSubmit">
-      <a-form-item label="学号" name="student_number" :rules="rules.student_number">
-        <a-input v-model:value="formState.student_number" placeholder="请输入学号" />
+      <a-form-item label="用户名" name="staff_number" :rules="rules.staff_number">
+        <a-input v-model:value="formState.staff_number" placeholder="请输入用户名" />
       </a-form-item>
       <a-form-item label="姓" name="last_name" :rules="rules.last_name">
         <a-input v-model:value="formState.last_name" placeholder="请输入姓" />
@@ -23,7 +23,7 @@
       </a-form-item>
       <div class="tips">
         已有账号？
-        <RouterLink to="/student/login">立即登录</RouterLink>
+        <RouterLink to="/staff/login">立即登录</RouterLink>
       </div>
       <a-form-item>
         <a-button type="primary" html-type="submit" style="width: 100%">注册</a-button>
@@ -35,18 +35,20 @@
 import { reactive } from 'vue'
 import { message } from 'ant-design-vue'
 import router from '@/router'
-import { useLoginStudentStore } from '@/stores/useLoginStudentStore.ts'
-import { studentsRegisterUsingPost as studentsRegister } from '@/api/studentsController.ts'
+import { staffRegisterUsingPost as staffRegister } from '@/api/staffController'
 
 // 用于接受表单输入的值
-const formState = reactive<API.StudentsRegisterRequest>({
-  student_number: '',
+const formState = reactive<API.StaffRegisterRequest>({
+  staff_number: '',
+  last_name: '',
+  first_name: '',
+  email: '',
   password_hash: '',
   check_password: ''
 })
 
 const rules = {
-  student_number: [{ required: true, message: '请输入学号' }],
+  staff_number: [{ required: true, message: '请输入用户名' }],
   last_name: [{ required: true, message: '请输入姓' }],
   first_name: [{ required: true, message: '请输入名' }],
   email: [
@@ -76,11 +78,10 @@ const rules = {
   ]
 }
 
-const loginStudentStore = useLoginStudentStore()
-
 const labelCol = {
   style: { width: '6em' }
 }
+
 /**
  * 提交表单
  * @param values
@@ -91,12 +92,12 @@ const handleSubmit = async (values: any) => {
     message.error('两次输入的密码不一致')
     return;
   }
-  const res = await studentsRegister(values)
+  const res = await staffRegister(values)
   // 注册成功，跳转到登录页面
   if (res.data.code === 0 && res.data.data) {
     message.success('注册成功')
     router.push({
-      path: '/student/login',
+      path: '/staff/login',
       replace: true,
     })
   } else {
@@ -111,7 +112,7 @@ const handleSubmit = async (values: any) => {
   align-items: center;
 }
 
-#userRegisterPage {
+#staffRegisterPage {
   max-width: 50em;
   min-width: 30em;
   margin: 0 auto;
@@ -122,13 +123,13 @@ const handleSubmit = async (values: any) => {
   margin-bottom: 16px;
 }
 
-.desc {
+desc {
   text-align: center;
   color: #bbb;
   margin-bottom: 16px;
 }
 
-.tips {
+tips {
   color: #bbb;
   text-align: right;
   font-size: 13px;
