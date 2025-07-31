@@ -7,7 +7,7 @@ export async function addCourseMaterialsUsingPost(
   body: API.CourseMaterialsAddRequest,
   options?: { [key: string]: any }
 ) {
-  return request<API.BaseResponseint>('/api/courseMaterials/add', {
+  return request<API.BaseResponseInt_>('/api/courseMaterials/add', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -22,7 +22,7 @@ export async function deleteCourseMaterialsUsingPost(
   body: API.CourseMaterialsDeleteRequest,
   options?: { [key: string]: any }
 ) {
-  return request<API.BaseResponseboolean>('/api/courseMaterials/delete', {
+  return request<API.BaseResponseBoolean_>('/api/courseMaterials/delete', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -38,7 +38,7 @@ export async function getCourseMaterialsByIdUsingGet(
   params: API.getCourseMaterialsByIdUsingGETParams,
   options?: { [key: string]: any }
 ) {
-  return request<API.BaseResponseCourseMaterials>('/api/courseMaterials/get', {
+  return request<API.BaseResponseCourseMaterials_>('/api/courseMaterials/get', {
     method: 'GET',
     params: {
       ...params,
@@ -53,7 +53,7 @@ export async function getCourseMaterialsVoByIdUsingGet(
   params: API.getCourseMaterialsVOByIdUsingGETParams,
   options?: { [key: string]: any }
 ) {
-  return request<API.BaseResponseCourseMaterialsVO>('/api/courseMaterials/get/vo', {
+  return request<API.BaseResponseCourseMaterialsVO_>('/api/courseMaterials/get/vo', {
     method: 'GET',
     params: {
       ...params,
@@ -67,7 +67,7 @@ export async function listCourseMaterialsByPageUsingPost(
   body: API.CourseMaterialsQueryRequest,
   options?: { [key: string]: any }
 ) {
-  return request<API.BaseResponsePageCourseMaterials>('/api/courseMaterials/list/page', {
+  return request<API.BaseResponsePageCourseMaterials_>('/api/courseMaterials/list/page', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -82,7 +82,7 @@ export async function listCourseMaterialsVoByPageUsingPost(
   body: API.CourseMaterialsQueryRequest,
   options?: { [key: string]: any }
 ) {
-  return request<API.BaseResponsePageCourseMaterialsVO>('/api/courseMaterials/list/page/vo', {
+  return request<API.BaseResponsePageCourseMaterialsVO_>('/api/courseMaterials/list/page/vo', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -97,7 +97,7 @@ export async function updateCourseMaterialsUsingPost(
   body: API.CourseMaterialsUpdateRequest,
   options?: { [key: string]: any }
 ) {
-  return request<API.BaseResponseboolean>('/api/courseMaterials/update', {
+  return request<API.BaseResponseBoolean_>('/api/courseMaterials/update', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

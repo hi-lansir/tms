@@ -7,7 +7,7 @@ export async function addEnrollmentsUsingPost(
   body: API.EnrollmentsAddRequest,
   options?: { [key: string]: any }
 ) {
-  return request<API.BaseResponseint>('/api/enrollments/add', {
+  return request<API.BaseResponseInt_>('/api/enrollments/add', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -22,7 +22,7 @@ export async function deleteEnrollmentsUsingPost(
   body: API.EnrollmentsDeleteRequest,
   options?: { [key: string]: any }
 ) {
-  return request<API.BaseResponseboolean>('/api/enrollments/delete', {
+  return request<API.BaseResponseBoolean_>('/api/enrollments/delete', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -38,7 +38,7 @@ export async function getEnrollmentsByIdUsingGet(
   params: API.getEnrollmentsByIdUsingGETParams,
   options?: { [key: string]: any }
 ) {
-  return request<API.BaseResponseEnrollments>('/api/enrollments/get', {
+  return request<API.BaseResponseEnrollments_>('/api/enrollments/get', {
     method: 'GET',
     params: {
       ...params,
@@ -53,7 +53,7 @@ export async function getEnrollmentsVoByIdUsingGet(
   params: API.getEnrollmentsVOByIdUsingGETParams,
   options?: { [key: string]: any }
 ) {
-  return request<API.BaseResponseEnrollmentsVO>('/api/enrollments/get/vo', {
+  return request<API.BaseResponseEnrollmentsVO_>('/api/enrollments/get/vo', {
     method: 'GET',
     params: {
       ...params,
@@ -67,7 +67,7 @@ export async function listEnrollmentsByPageUsingPost(
   body: API.EnrollmentsQueryRequest,
   options?: { [key: string]: any }
 ) {
-  return request<API.BaseResponsePageEnrollments>('/api/enrollments/list/page', {
+  return request<API.BaseResponsePageEnrollments_>('/api/enrollments/list/page', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -82,7 +82,7 @@ export async function listEnrollmentsVoByPageUsingPost(
   body: API.EnrollmentsQueryRequest,
   options?: { [key: string]: any }
 ) {
-  return request<API.BaseResponsePageEnrollmentsVO>('/api/enrollments/list/page/vo', {
+  return request<API.BaseResponsePageEnrollmentsVO_>('/api/enrollments/list/page/vo', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -97,7 +97,7 @@ export async function updateEnrollmentsUsingPost(
   body: API.EnrollmentsUpdateRequest,
   options?: { [key: string]: any }
 ) {
-  return request<API.BaseResponseboolean>('/api/enrollments/update', {
+  return request<API.BaseResponseBoolean_>('/api/enrollments/update', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

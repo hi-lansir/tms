@@ -27,9 +27,9 @@ declare namespace API {
     create_time?: string
     current?: number
     instructor_id?: number
-    pageSize?: number
-    sortField?: string
-    sortOrder?: string
+    page_size?: number
+    sort_field?: string
+    sort_order?: string
     title?: string
   }
 
@@ -72,9 +72,9 @@ declare namespace API {
     class_id?: number
     current?: number
     due_date?: string
-    pageSize?: number
-    sortField?: string
-    sortOrder?: string
+    page_size?: number
+    sort_field?: string
+    sort_order?: string
     title?: string
   }
 
@@ -107,9 +107,9 @@ declare namespace API {
   type AssignmentSubmissionsQueryRequest = {
     assignment_id?: number
     current?: number
-    pageSize?: number
-    sortField?: string
-    sortOrder?: string
+    page_size?: number
+    sort_field?: string
+    sort_order?: string
     student_id?: number
     submission_id?: number
   }
@@ -180,10 +180,10 @@ declare namespace API {
     attendance_id?: number
     class_id?: number
     current?: number
-    pageSize?: number
+    page_size?: number
     session_date?: string
-    sortField?: string
-    sortOrder?: string
+    sort_field?: string
+    sort_order?: string
     status?: Record<string, any>
     student_id?: number
   }
@@ -206,388 +206,566 @@ declare namespace API {
     student_id?: number
   }
 
-  type BaseResponseAnnouncements = {
+  type BaseResponseAnnouncements_ = {
     code?: number
     data?: Announcements
     message?: string
   }
 
-  type BaseResponseAnnouncementsVO = {
+  type BaseResponseAnnouncementsVO_ = {
     code?: number
     data?: AnnouncementsVO
     message?: string
   }
 
-  type BaseResponseAssignments = {
+  type BaseResponseAssignments_ = {
     code?: number
     data?: Assignments
     message?: string
   }
 
-  type BaseResponseAssignmentSubmissions = {
+  type BaseResponseAssignmentSubmissions_ = {
     code?: number
     data?: AssignmentSubmissions
     message?: string
   }
 
-  type BaseResponseAssignmentSubmissionsVO = {
+  type BaseResponseAssignmentSubmissionsVO_ = {
     code?: number
     data?: AssignmentSubmissionsVO
     message?: string
   }
 
-  type BaseResponseAssignmentsVO = {
+  type BaseResponseAssignmentsVO_ = {
     code?: number
     data?: AssignmentsVO
     message?: string
   }
 
-  type BaseResponseAttendance = {
+  type BaseResponseAttendance_ = {
     code?: number
     data?: Attendance
     message?: string
   }
 
-  type BaseResponseAttendanceVO = {
+  type BaseResponseAttendanceVO_ = {
     code?: number
     data?: AttendanceVO
     message?: string
   }
 
-  type BaseResponseboolean = {
+  type BaseResponseBoolean_ = {
     code?: number
     data?: boolean
     message?: string
   }
 
-  type BaseResponseClasses = {
+  type BaseResponseChapterProgress_ = {
+    code?: number
+    data?: ChapterProgress
+    message?: string
+  }
+
+  type BaseResponseChapterProgressVO_ = {
+    code?: number
+    data?: ChapterProgressVO
+    message?: string
+  }
+
+  type BaseResponseClasses_ = {
     code?: number
     data?: Classes
     message?: string
   }
 
-  type BaseResponseClassesVO = {
+  type BaseResponseClassesVO_ = {
     code?: number
     data?: ClassesVO
     message?: string
   }
 
-  type BaseResponseCourseMaterials = {
+  type BaseResponseCourseChapters_ = {
+    code?: number
+    data?: CourseChapters
+    message?: string
+  }
+
+  type BaseResponseCourseChaptersVO_ = {
+    code?: number
+    data?: CourseChaptersVO
+    message?: string
+  }
+
+  type BaseResponseCourseMaterials_ = {
     code?: number
     data?: CourseMaterials
     message?: string
   }
 
-  type BaseResponseCourseMaterialsVO = {
+  type BaseResponseCourseMaterialsVO_ = {
     code?: number
     data?: CourseMaterialsVO
     message?: string
   }
 
-  type BaseResponseCourseModules = {
+  type BaseResponseCourseModules_ = {
     code?: number
     data?: CourseModules
     message?: string
   }
 
-  type BaseResponseCourseModulesVO = {
+  type BaseResponseCourseModulesVO_ = {
     code?: number
     data?: CourseModulesVO
     message?: string
   }
 
-  type BaseResponseCourses = {
+  type BaseResponseCourses_ = {
     code?: number
     data?: Courses
     message?: string
   }
 
-  type BaseResponseCoursesVO = {
+  type BaseResponseCoursesVO_ = {
     code?: number
     data?: CoursesVO
     message?: string
   }
 
-  type BaseResponseEnrollments = {
+  type BaseResponseDepartments_ = {
+    code?: number
+    data?: Departments
+    message?: string
+  }
+
+  type BaseResponseEnrollments_ = {
     code?: number
     data?: Enrollments
     message?: string
   }
 
-  type BaseResponseEnrollmentsVO = {
+  type BaseResponseEnrollmentsVO_ = {
     code?: number
     data?: EnrollmentsVO
     message?: string
   }
 
-  type BaseResponseForumPosts = {
+  type BaseResponseForumPosts_ = {
     code?: number
     data?: ForumPosts
     message?: string
   }
 
-  type BaseResponseForumPostsVO = {
+  type BaseResponseForumPostsVO_ = {
     code?: number
     data?: ForumPostsVO
     message?: string
   }
 
-  type BaseResponseint = {
+  type BaseResponseInt_ = {
     code?: number
     data?: number
     message?: string
   }
 
-  type BaseResponseKnowledgePoints = {
+  type BaseResponseKnowledgePoints_ = {
     code?: number
     data?: KnowledgePoints
     message?: string
   }
 
-  type BaseResponseKnowledgePointsVO = {
+  type BaseResponseKnowledgePointsVO_ = {
     code?: number
     data?: KnowledgePointsVO
     message?: string
   }
 
-  type BaseResponseListDepartments = {
+  type BaseResponseListChapterProgressVO_ = {
+    code?: number
+    data?: ChapterProgressVO[]
+    message?: string
+  }
+
+  type BaseResponseListCourseChaptersVO_ = {
+    code?: number
+    data?: CourseChaptersVO[]
+    message?: string
+  }
+
+  type BaseResponseListCourses_ = {
+    code?: number
+    data?: Courses[]
+    message?: string
+  }
+
+  type BaseResponseListCoursesVO_ = {
+    code?: number
+    data?: CoursesVO[]
+    message?: string
+  }
+
+  type BaseResponseListDepartments_ = {
     code?: number
     data?: Departments[]
     message?: string
   }
 
-  type BaseResponseListKnowledgePoints = {
+  type BaseResponseListKnowledgePoints_ = {
     code?: number
     data?: KnowledgePoints[]
     message?: string
   }
 
-  type BaseResponseLoginStaffVO = {
+  type BaseResponseListRoles_ = {
+    code?: number
+    data?: Roles[]
+    message?: string
+  }
+
+  type BaseResponseListStudentCoursesVO_ = {
+    code?: number
+    data?: StudentCoursesVO[]
+    message?: string
+  }
+
+  type BaseResponseLoginStaffVO_ = {
     code?: number
     data?: LoginStaffVO
     message?: string
   }
 
-  type BaseResponseLoginStudentsVO = {
+  type BaseResponseLoginStudentsVO_ = {
     code?: number
     data?: LoginStudentsVO
     message?: string
   }
 
-  type BaseResponselong = {
+  type BaseResponseLong_ = {
     code?: number
     data?: number
     message?: string
   }
 
-  type BaseResponsePageAnnouncements = {
+  type BaseResponseMapStringString_ = {
     code?: number
-    data?: PageAnnouncements
+    data?: Record<string, any>
     message?: string
   }
 
-  type BaseResponsePageAnnouncementsVO = {
+  type BaseResponsePageAnnouncements_ = {
     code?: number
-    data?: PageAnnouncementsVO
+    data?: PageAnnouncements_
     message?: string
   }
 
-  type BaseResponsePageAssignments = {
+  type BaseResponsePageAnnouncementsVO_ = {
     code?: number
-    data?: PageAssignments
+    data?: PageAnnouncementsVO_
     message?: string
   }
 
-  type BaseResponsePageAssignmentSubmissions = {
+  type BaseResponsePageAssignments_ = {
     code?: number
-    data?: PageAssignmentSubmissions
+    data?: PageAssignments_
     message?: string
   }
 
-  type BaseResponsePageAssignmentSubmissionsVO = {
+  type BaseResponsePageAssignmentSubmissions_ = {
     code?: number
-    data?: PageAssignmentSubmissionsVO
+    data?: PageAssignmentSubmissions_
     message?: string
   }
 
-  type BaseResponsePageAssignmentsVO = {
+  type BaseResponsePageAssignmentSubmissionsVO_ = {
     code?: number
-    data?: PageAssignmentsVO
+    data?: PageAssignmentSubmissionsVO_
     message?: string
   }
 
-  type BaseResponsePageAttendance = {
+  type BaseResponsePageAssignmentsVO_ = {
     code?: number
-    data?: PageAttendance
+    data?: PageAssignmentsVO_
     message?: string
   }
 
-  type BaseResponsePageAttendanceVO = {
+  type BaseResponsePageAttendance_ = {
     code?: number
-    data?: PageAttendanceVO
+    data?: PageAttendance_
     message?: string
   }
 
-  type BaseResponsePageClasses = {
+  type BaseResponsePageAttendanceVO_ = {
     code?: number
-    data?: PageClasses
+    data?: PageAttendanceVO_
     message?: string
   }
 
-  type BaseResponsePageClassesVO = {
+  type BaseResponsePageChapterProgress_ = {
     code?: number
-    data?: PageClassesVO
+    data?: PageChapterProgress_
     message?: string
   }
 
-  type BaseResponsePageCourseMaterials = {
+  type BaseResponsePageChapterProgressVO_ = {
     code?: number
-    data?: PageCourseMaterials
+    data?: PageChapterProgressVO_
     message?: string
   }
 
-  type BaseResponsePageCourseMaterialsVO = {
+  type BaseResponsePageClasses_ = {
     code?: number
-    data?: PageCourseMaterialsVO
+    data?: PageClasses_
     message?: string
   }
 
-  type BaseResponsePageCourseModules = {
+  type BaseResponsePageClassesVO_ = {
     code?: number
-    data?: PageCourseModules
+    data?: PageClassesVO_
     message?: string
   }
 
-  type BaseResponsePageCourseModulesVO = {
+  type BaseResponsePageCourseChapters_ = {
     code?: number
-    data?: PageCourseModulesVO
+    data?: PageCourseChapters_
     message?: string
   }
 
-  type BaseResponsePageCourses = {
+  type BaseResponsePageCourseChaptersVO_ = {
     code?: number
-    data?: PageCourses
+    data?: PageCourseChaptersVO_
     message?: string
   }
 
-  type BaseResponsePageCoursesVO = {
+  type BaseResponsePageCourseMaterials_ = {
     code?: number
-    data?: PageCoursesVO
+    data?: PageCourseMaterials_
     message?: string
   }
 
-  type BaseResponsePageEnrollments = {
+  type BaseResponsePageCourseMaterialsVO_ = {
     code?: number
-    data?: PageEnrollments
+    data?: PageCourseMaterialsVO_
     message?: string
   }
 
-  type BaseResponsePageEnrollmentsVO = {
+  type BaseResponsePageCourseModules_ = {
     code?: number
-    data?: PageEnrollmentsVO
+    data?: PageCourseModules_
     message?: string
   }
 
-  type BaseResponsePageForumPosts = {
+  type BaseResponsePageCourseModulesVO_ = {
     code?: number
-    data?: PageForumPosts
+    data?: PageCourseModulesVO_
     message?: string
   }
 
-  type BaseResponsePageForumPostsVO = {
+  type BaseResponsePageCourses_ = {
     code?: number
-    data?: PageForumPostsVO
+    data?: PageCourses_
     message?: string
   }
 
-  type BaseResponsePageKnowledgePoints = {
+  type BaseResponsePageCoursesVO_ = {
     code?: number
-    data?: PageKnowledgePoints
+    data?: PageCoursesVO_
     message?: string
   }
 
-  type BaseResponsePageKnowledgePointsVO = {
+  type BaseResponsePageEnrollments_ = {
     code?: number
-    data?: PageKnowledgePointsVO
+    data?: PageEnrollments_
     message?: string
   }
 
-  type BaseResponsePageQuizQuestions = {
+  type BaseResponsePageEnrollmentsVO_ = {
     code?: number
-    data?: PageQuizQuestions
+    data?: PageEnrollmentsVO_
     message?: string
   }
 
-  type BaseResponsePageQuizQuestionsVO = {
+  type BaseResponsePageForumPosts_ = {
     code?: number
-    data?: PageQuizQuestionsVO
+    data?: PageForumPosts_
     message?: string
   }
 
-  type BaseResponsePageQuizzes = {
+  type BaseResponsePageForumPostsVO_ = {
     code?: number
-    data?: PageQuizzes
+    data?: PageForumPostsVO_
     message?: string
   }
 
-  type BaseResponsePageQuizzesVO = {
+  type BaseResponsePageKnowledgePoints_ = {
     code?: number
-    data?: PageQuizzesVO
+    data?: PageKnowledgePoints_
     message?: string
   }
 
-  type BaseResponsePageStudentActivityLogs = {
+  type BaseResponsePageKnowledgePointsVO_ = {
     code?: number
-    data?: PageStudentActivityLogs
+    data?: PageKnowledgePointsVO_
     message?: string
   }
 
-  type BaseResponsePageStudentActivityLogsVO = {
+  type BaseResponsePageQuizQuestions_ = {
     code?: number
-    data?: PageStudentActivityLogsVO
+    data?: PageQuizQuestions_
     message?: string
   }
 
-  type BaseResponseQuizQuestions = {
+  type BaseResponsePageQuizQuestionsVO_ = {
+    code?: number
+    data?: PageQuizQuestionsVO_
+    message?: string
+  }
+
+  type BaseResponsePageQuizzes_ = {
+    code?: number
+    data?: PageQuizzes_
+    message?: string
+  }
+
+  type BaseResponsePageQuizzesVO_ = {
+    code?: number
+    data?: PageQuizzesVO_
+    message?: string
+  }
+
+  type BaseResponsePageRoles_ = {
+    code?: number
+    data?: PageRoles_
+    message?: string
+  }
+
+  type BaseResponsePageStudentActivityLogs_ = {
+    code?: number
+    data?: PageStudentActivityLogs_
+    message?: string
+  }
+
+  type BaseResponsePageStudentActivityLogsVO_ = {
+    code?: number
+    data?: PageStudentActivityLogsVO_
+    message?: string
+  }
+
+  type BaseResponseQuizQuestions_ = {
     code?: number
     data?: QuizQuestions
     message?: string
   }
 
-  type BaseResponseQuizQuestionsVO = {
+  type BaseResponseQuizQuestionsVO_ = {
     code?: number
     data?: QuizQuestionsVO
     message?: string
   }
 
-  type BaseResponseQuizzes = {
+  type BaseResponseQuizzes_ = {
     code?: number
     data?: Quizzes
     message?: string
   }
 
-  type BaseResponseQuizzesVO = {
+  type BaseResponseQuizzesVO_ = {
     code?: number
     data?: QuizzesVO
     message?: string
   }
 
-  type BaseResponseStudentActivityLogs = {
+  type BaseResponseRoles_ = {
+    code?: number
+    data?: Roles
+    message?: string
+  }
+
+  type BaseResponseStudentActivityLogs_ = {
     code?: number
     data?: StudentActivityLogs
     message?: string
   }
 
-  type BaseResponseStudentActivityLogsVO = {
+  type BaseResponseStudentActivityLogsVO_ = {
     code?: number
     data?: StudentActivityLogsVO
     message?: string
+  }
+
+  type bindMaterialToChapterUsingPOSTParams = {
+    /** chapter_id */
+    chapter_id: number
+    /** material_id */
+    material_id?: number
+  }
+
+  type ChapterProgress = {
+    chapter_id?: number
+    last_update?: string
+    progress_id?: number
+    status_code?: number
+    student_id?: number
+  }
+
+  type ChapterProgressAddRequest = {
+    chapter_id?: number
+    status_code?: number
+    student_id?: number
+  }
+
+  type ChapterProgressBatchUpdateRequest = {
+    chapter_ids?: number[]
+    status_code?: number
+    student_id?: number
+  }
+
+  type ChapterProgressDeleteRequest = {
+    chapter_id?: number
+    progress_id?: number
+    student_id?: number
+  }
+
+  type ChapterProgressQueryRequest = {
+    chapter_id?: number
+    current?: number
+    page_size?: number
+    progress_id?: number
+    sort_field?: string
+    sort_order?: string
+    status_code?: number
+    student_id?: number
+  }
+
+  type ChapterProgressUpdateRequest = {
+    chapter_id?: number
+    progress_id?: number
+    status_code?: number
+    student_id?: number
+  }
+
+  type ChapterProgressVO = {
+    chapter_id?: number
+    full_path?: string
+    last_update?: string
+    progress_id?: number
+    status_code?: number
+    student_id?: number
+    title?: string
+  }
+
+  type ChapterTreeAddRequest = {
+    children?: ChapterTreeAddRequest[]
+    course_materials_add_request?: CourseMaterialsAddRequest
+    material_id?: number
+    sort_order?: number
+    title?: string
   }
 
   type Classes = {
     class_id?: number
     course_id?: number
     instructor_id?: number
+    invite_code?: string
     is_delete?: number
     location?: string
     schedule?: string
@@ -598,6 +776,7 @@ declare namespace API {
   type ClassesAddRequest = {
     course_id?: number
     instructor_id?: number
+    invite_code?: string
     location?: string
     schedule?: string
     semester?: string
@@ -613,10 +792,10 @@ declare namespace API {
     course_id?: number
     current?: number
     instructor_id?: number
-    pageSize?: number
+    page_size?: number
     semester?: string
-    sortField?: string
-    sortOrder?: string
+    sort_field?: string
+    sort_order?: string
     year?: string
   }
 
@@ -624,6 +803,7 @@ declare namespace API {
     class_id?: number
     course_id?: number
     instructor_id?: number
+    invite_code?: string
     location?: string
     schedule?: string
     semester?: string
@@ -634,10 +814,69 @@ declare namespace API {
     class_id?: number
     course_id?: number
     instructor_id?: number
+    invite_code?: string
     location?: string
     schedule?: string
     semester?: string
     year?: string
+  }
+
+  type CourseChapters = {
+    chapter_id?: number
+    course_id?: number
+    level_path?: string
+    material_id?: number
+    parent_id?: number
+    sort_order?: number
+    title?: string
+  }
+
+  type CourseChaptersAddRequest = {
+    course_id?: number
+    level_path?: string
+    material_id?: number
+    parent_id?: number
+    sort_order?: number
+    title?: string
+  }
+
+  type CourseChaptersDeleteRequest = {
+    chapter_id?: number
+  }
+
+  type CourseChaptersQueryRequest = {
+    chapter_id?: number
+    course_id?: number
+    current?: number
+    level_path?: string
+    page_size?: number
+    parent_id?: number
+    sort_field?: string
+    sort_order?: string
+    title?: string
+  }
+
+  type CourseChaptersUpdateRequest = {
+    chapter_id?: number
+    course_id?: number
+    level_path?: string
+    material_id?: number
+    parent_id?: number
+    sort_order?: number
+    title?: string
+  }
+
+  type CourseChaptersVO = {
+    chapter_id?: number
+    children?: CourseChaptersVO[]
+    course_id?: number
+    level_path?: string
+    material_detail?: CourseMaterialsVO
+    material_id?: number
+    parent_id?: number
+    sort_order?: number
+    status_code?: number
+    title?: string
   }
 
   type CourseMaterials = {
@@ -653,7 +892,6 @@ declare namespace API {
   type CourseMaterialsAddRequest = {
     file_path_or_url?: string
     material_type?: string
-    module_id?: number
     title?: string
   }
 
@@ -666,9 +904,9 @@ declare namespace API {
     material_id?: number
     material_type?: string
     module_id?: number
-    pageSize?: number
-    sortField?: string
-    sortOrder?: string
+    page_size?: number
+    sort_field?: string
+    sort_order?: string
     title?: string
   }
 
@@ -713,9 +951,9 @@ declare namespace API {
     class_id?: number
     current?: number
     module_id?: number
-    pageSize?: number
-    sortField?: string
-    sortOrder?: string
+    page_size?: number
+    sort_field?: string
+    sort_order?: string
     title?: string
   }
 
@@ -743,14 +981,20 @@ declare namespace API {
     department_id?: number
     description?: string
     is_delete?: number
+    priority?: number
+    recommendation_index?: number
+    visit_count?: number
   }
 
   type CoursesAddRequest = {
+    chapters?: ChapterTreeAddRequest[]
     course_code?: string
     course_title?: string
     credits?: number
-    department_id?: number
+    department_name?: string
     description?: string
+    priority?: number
+    recommendation_index?: number
   }
 
   type CoursesDeleteRequest = {
@@ -764,9 +1008,10 @@ declare namespace API {
     credits?: number
     current?: number
     department_id?: number
-    pageSize?: number
-    sortField?: string
-    sortOrder?: string
+    page_size?: number
+    recommendation_index?: number
+    sort_field?: string
+    sort_order?: string
   }
 
   type CoursesUpdateRequest = {
@@ -776,15 +1021,22 @@ declare namespace API {
     credits?: number
     department_id?: number
     description?: string
+    priority?: number
+    recommendation_index?: number
   }
 
   type CoursesVO = {
+    chapter_tree?: CourseChaptersVO[]
     course_code?: string
     course_id?: number
     course_title?: string
     credits?: number
     department_id?: number
     description?: string
+    is_enrolled?: boolean
+    progress_percent?: number
+    recommendation_index?: number
+    visit_count?: number
   }
 
   type Departments = {
@@ -801,6 +1053,16 @@ declare namespace API {
 
   type DepartmentsDeleteRequest = {
     department_id?: number
+  }
+
+  type dropCourseUsingPOSTParams = {
+    /** courseId */
+    courseId: number
+  }
+
+  type enrollCourseUsingPOSTParams = {
+    /** courseId */
+    courseId: number
   }
 
   type Enrollments = {
@@ -829,9 +1091,9 @@ declare namespace API {
     class_id?: number
     current?: number
     enrollment_id?: number
-    pageSize?: number
-    sortField?: string
-    sortOrder?: string
+    page_size?: number
+    sort_field?: string
+    sort_order?: string
     student_id?: number
   }
 
@@ -883,11 +1145,11 @@ declare namespace API {
     class_id?: number
     create_time?: string
     current?: number
-    pageSize?: number
+    page_size?: number
     parent_post_id?: number
     post_id?: number
-    sortField?: string
-    sortOrder?: string
+    sort_field?: string
+    sort_order?: string
     title?: string
     user_id?: number
     user_type?: Record<string, any>
@@ -946,6 +1208,40 @@ declare namespace API {
     attendance_id?: number
   }
 
+  type getByStudentAndChapterUsingGETParams = {
+    /** chapter_id */
+    chapter_id: number
+    /** student_id */
+    student_id: number
+  }
+
+  type getChapterProgressByIdUsingGETParams = {
+    /** progress_id */
+    progress_id?: number
+  }
+
+  type getChapterProgressVOByIdUsingGETParams = {
+    /** progress_id */
+    progress_id?: number
+  }
+
+  type getChapterTreeUsingGETParams = {
+    /** course_id */
+    course_id: number
+  }
+
+  type getChapterTreeWithProgressUsingGETParams = {
+    /** course_id */
+    course_id: number
+    /** student_id */
+    student_id: number
+  }
+
+  type getChapterWithMaterialUsingGETParams = {
+    /** chapter_id */
+    chapter_id: number
+  }
+
   type getClassesByIdUsingGETParams = {
     /** class_id */
     class_id?: number
@@ -954,6 +1250,21 @@ declare namespace API {
   type getClassesVOByIdUsingGETParams = {
     /** class_id */
     class_id?: number
+  }
+
+  type getCourseChaptersByIdUsingGETParams = {
+    /** chapter_id */
+    chapter_id?: number
+  }
+
+  type getCourseChaptersVOByIdUsingGETParams = {
+    /** chapter_id */
+    chapter_id?: number
+  }
+
+  type getCourseDetailWithChaptersUsingGETParams = {
+    /** course_id */
+    course_id: number
   }
 
   type getCourseMaterialsByIdUsingGETParams = {
@@ -976,6 +1287,13 @@ declare namespace API {
     module_id?: number
   }
 
+  type getCourseProgressUsingGETParams = {
+    /** course_id */
+    course_id: number
+    /** student_id */
+    student_id: number
+  }
+
   type getCoursesByIdUsingGETParams = {
     /** course_id */
     course_id?: number
@@ -984,6 +1302,11 @@ declare namespace API {
   type getCoursesVOByIdUsingGETParams = {
     /** course_id */
     course_id?: number
+  }
+
+  type getDeptByNameUsingGETParams = {
+    /** departmentName */
+    departmentName: string
   }
 
   type getEnrollmentsByIdUsingGETParams = {
@@ -1041,6 +1364,16 @@ declare namespace API {
     quiz_id?: number
   }
 
+  type getRoleByIdUsingGETParams = {
+    /** id */
+    id?: number
+  }
+
+  type getRolesByStaffIdUsingGETParams = {
+    /** staffId */
+    staffId: number
+  }
+
   type getStudentActivityLogsByIdUsingGETParams = {
     /** log_id */
     log_id?: number
@@ -1049,6 +1382,15 @@ declare namespace API {
   type getStudentActivityLogsVOByIdUsingGETParams = {
     /** log_id */
     log_id?: number
+  }
+
+  type hybridRecommendUsingGETParams = {
+    /** courseId */
+    courseId?: number
+    /** limit */
+    limit?: number
+    /** studentId */
+    studentId?: number
   }
 
   type KnowledgePoints = {
@@ -1074,11 +1416,11 @@ declare namespace API {
   type KnowledgePointsQueryRequest = {
     course_id?: number
     current?: number
-    pageSize?: number
+    page_size?: number
     parent_point_id?: number
     point_id?: number
-    sortField?: string
-    sortOrder?: string
+    sort_field?: string
+    sort_order?: string
     title?: string
   }
 
@@ -1107,6 +1449,7 @@ declare namespace API {
     staff_number?: string
     title?: string
     token?: string
+    token_name?: string
   }
 
   type LoginStudentsVO = {
@@ -1118,456 +1461,447 @@ declare namespace API {
     student_id?: number
     student_number?: string
     token?: string
+    token_name?: string
   }
 
-  type ModelAndView = {
-    empty?: boolean
-    model?: Record<string, any>
-    modelMap?: Record<string, any>
-    reference?: boolean
-    status?:
-      | 'ACCEPTED'
-      | 'ALREADY_REPORTED'
-      | 'BAD_GATEWAY'
-      | 'BAD_REQUEST'
-      | 'BANDWIDTH_LIMIT_EXCEEDED'
-      | 'CHECKPOINT'
-      | 'CONFLICT'
-      | 'CONTINUE'
-      | 'CREATED'
-      | 'DESTINATION_LOCKED'
-      | 'EXPECTATION_FAILED'
-      | 'FAILED_DEPENDENCY'
-      | 'FORBIDDEN'
-      | 'FOUND'
-      | 'GATEWAY_TIMEOUT'
-      | 'GONE'
-      | 'HTTP_VERSION_NOT_SUPPORTED'
-      | 'IM_USED'
-      | 'INSUFFICIENT_SPACE_ON_RESOURCE'
-      | 'INSUFFICIENT_STORAGE'
-      | 'INTERNAL_SERVER_ERROR'
-      | 'I_AM_A_TEAPOT'
-      | 'LENGTH_REQUIRED'
-      | 'LOCKED'
-      | 'LOOP_DETECTED'
-      | 'METHOD_FAILURE'
-      | 'METHOD_NOT_ALLOWED'
-      | 'MOVED_PERMANENTLY'
-      | 'MOVED_TEMPORARILY'
-      | 'MULTIPLE_CHOICES'
-      | 'MULTI_STATUS'
-      | 'NETWORK_AUTHENTICATION_REQUIRED'
-      | 'NON_AUTHORITATIVE_INFORMATION'
-      | 'NOT_ACCEPTABLE'
-      | 'NOT_EXTENDED'
-      | 'NOT_FOUND'
-      | 'NOT_IMPLEMENTED'
-      | 'NOT_MODIFIED'
-      | 'NO_CONTENT'
-      | 'OK'
-      | 'PARTIAL_CONTENT'
-      | 'PAYLOAD_TOO_LARGE'
-      | 'PAYMENT_REQUIRED'
-      | 'PERMANENT_REDIRECT'
-      | 'PRECONDITION_FAILED'
-      | 'PRECONDITION_REQUIRED'
-      | 'PROCESSING'
-      | 'PROXY_AUTHENTICATION_REQUIRED'
-      | 'REQUESTED_RANGE_NOT_SATISFIABLE'
-      | 'REQUEST_ENTITY_TOO_LARGE'
-      | 'REQUEST_HEADER_FIELDS_TOO_LARGE'
-      | 'REQUEST_TIMEOUT'
-      | 'REQUEST_URI_TOO_LONG'
-      | 'RESET_CONTENT'
-      | 'SEE_OTHER'
-      | 'SERVICE_UNAVAILABLE'
-      | 'SWITCHING_PROTOCOLS'
-      | 'TEMPORARY_REDIRECT'
-      | 'TOO_EARLY'
-      | 'TOO_MANY_REQUESTS'
-      | 'UNAUTHORIZED'
-      | 'UNAVAILABLE_FOR_LEGAL_REASONS'
-      | 'UNPROCESSABLE_ENTITY'
-      | 'UNSUPPORTED_MEDIA_TYPE'
-      | 'UPGRADE_REQUIRED'
-      | 'URI_TOO_LONG'
-      | 'USE_PROXY'
-      | 'VARIANT_ALSO_NEGOTIATES'
-    view?: View
-    viewName?: string
-  }
+  type MapStringString_ = true
 
   type OrderItem = {
     asc?: boolean
     column?: string
   }
 
-  type PageAnnouncements = {
-    countId?: string
+  type PageAnnouncements_ = {
+    count_id?: string
     current?: number
-    maxLimit?: number
-    optimizeCountSql?: boolean
+    max_limit?: number
+    optimize_count_sql?: boolean
     orders?: OrderItem[]
     pages?: number
     records?: Announcements[]
-    searchCount?: boolean
+    search_count?: boolean
     size?: number
     total?: number
   }
 
-  type PageAnnouncementsVO = {
-    countId?: string
+  type PageAnnouncementsVO_ = {
+    count_id?: string
     current?: number
-    maxLimit?: number
-    optimizeCountSql?: boolean
+    max_limit?: number
+    optimize_count_sql?: boolean
     orders?: OrderItem[]
     pages?: number
     records?: AnnouncementsVO[]
-    searchCount?: boolean
+    search_count?: boolean
     size?: number
     total?: number
   }
 
-  type PageAssignments = {
-    countId?: string
+  type PageAssignments_ = {
+    count_id?: string
     current?: number
-    maxLimit?: number
-    optimizeCountSql?: boolean
+    max_limit?: number
+    optimize_count_sql?: boolean
     orders?: OrderItem[]
     pages?: number
     records?: Assignments[]
-    searchCount?: boolean
+    search_count?: boolean
     size?: number
     total?: number
   }
 
-  type PageAssignmentSubmissions = {
-    countId?: string
+  type PageAssignmentSubmissions_ = {
+    count_id?: string
     current?: number
-    maxLimit?: number
-    optimizeCountSql?: boolean
+    max_limit?: number
+    optimize_count_sql?: boolean
     orders?: OrderItem[]
     pages?: number
     records?: AssignmentSubmissions[]
-    searchCount?: boolean
+    search_count?: boolean
     size?: number
     total?: number
   }
 
-  type PageAssignmentSubmissionsVO = {
-    countId?: string
+  type PageAssignmentSubmissionsVO_ = {
+    count_id?: string
     current?: number
-    maxLimit?: number
-    optimizeCountSql?: boolean
+    max_limit?: number
+    optimize_count_sql?: boolean
     orders?: OrderItem[]
     pages?: number
     records?: AssignmentSubmissionsVO[]
-    searchCount?: boolean
+    search_count?: boolean
     size?: number
     total?: number
   }
 
-  type PageAssignmentsVO = {
-    countId?: string
+  type PageAssignmentsVO_ = {
+    count_id?: string
     current?: number
-    maxLimit?: number
-    optimizeCountSql?: boolean
+    max_limit?: number
+    optimize_count_sql?: boolean
     orders?: OrderItem[]
     pages?: number
     records?: AssignmentsVO[]
-    searchCount?: boolean
+    search_count?: boolean
     size?: number
     total?: number
   }
 
-  type PageAttendance = {
-    countId?: string
+  type PageAttendance_ = {
+    count_id?: string
     current?: number
-    maxLimit?: number
-    optimizeCountSql?: boolean
+    max_limit?: number
+    optimize_count_sql?: boolean
     orders?: OrderItem[]
     pages?: number
     records?: Attendance[]
-    searchCount?: boolean
+    search_count?: boolean
     size?: number
     total?: number
   }
 
-  type PageAttendanceVO = {
-    countId?: string
+  type PageAttendanceVO_ = {
+    count_id?: string
     current?: number
-    maxLimit?: number
-    optimizeCountSql?: boolean
+    max_limit?: number
+    optimize_count_sql?: boolean
     orders?: OrderItem[]
     pages?: number
     records?: AttendanceVO[]
-    searchCount?: boolean
+    search_count?: boolean
     size?: number
     total?: number
   }
 
-  type PageClasses = {
-    countId?: string
+  type PageChapterProgress_ = {
+    count_id?: string
     current?: number
-    maxLimit?: number
-    optimizeCountSql?: boolean
+    max_limit?: number
+    optimize_count_sql?: boolean
+    orders?: OrderItem[]
+    pages?: number
+    records?: ChapterProgress[]
+    search_count?: boolean
+    size?: number
+    total?: number
+  }
+
+  type PageChapterProgressVO_ = {
+    count_id?: string
+    current?: number
+    max_limit?: number
+    optimize_count_sql?: boolean
+    orders?: OrderItem[]
+    pages?: number
+    records?: ChapterProgressVO[]
+    search_count?: boolean
+    size?: number
+    total?: number
+  }
+
+  type PageClasses_ = {
+    count_id?: string
+    current?: number
+    max_limit?: number
+    optimize_count_sql?: boolean
     orders?: OrderItem[]
     pages?: number
     records?: Classes[]
-    searchCount?: boolean
+    search_count?: boolean
     size?: number
     total?: number
   }
 
-  type PageClassesVO = {
-    countId?: string
+  type PageClassesVO_ = {
+    count_id?: string
     current?: number
-    maxLimit?: number
-    optimizeCountSql?: boolean
+    max_limit?: number
+    optimize_count_sql?: boolean
     orders?: OrderItem[]
     pages?: number
     records?: ClassesVO[]
-    searchCount?: boolean
+    search_count?: boolean
     size?: number
     total?: number
   }
 
-  type PageCourseMaterials = {
-    countId?: string
+  type PageCourseChapters_ = {
+    count_id?: string
     current?: number
-    maxLimit?: number
-    optimizeCountSql?: boolean
+    max_limit?: number
+    optimize_count_sql?: boolean
+    orders?: OrderItem[]
+    pages?: number
+    records?: CourseChapters[]
+    search_count?: boolean
+    size?: number
+    total?: number
+  }
+
+  type PageCourseChaptersVO_ = {
+    count_id?: string
+    current?: number
+    max_limit?: number
+    optimize_count_sql?: boolean
+    orders?: OrderItem[]
+    pages?: number
+    records?: CourseChaptersVO[]
+    search_count?: boolean
+    size?: number
+    total?: number
+  }
+
+  type PageCourseMaterials_ = {
+    count_id?: string
+    current?: number
+    max_limit?: number
+    optimize_count_sql?: boolean
     orders?: OrderItem[]
     pages?: number
     records?: CourseMaterials[]
-    searchCount?: boolean
+    search_count?: boolean
     size?: number
     total?: number
   }
 
-  type PageCourseMaterialsVO = {
-    countId?: string
+  type PageCourseMaterialsVO_ = {
+    count_id?: string
     current?: number
-    maxLimit?: number
-    optimizeCountSql?: boolean
+    max_limit?: number
+    optimize_count_sql?: boolean
     orders?: OrderItem[]
     pages?: number
     records?: CourseMaterialsVO[]
-    searchCount?: boolean
+    search_count?: boolean
     size?: number
     total?: number
   }
 
-  type PageCourseModules = {
-    countId?: string
+  type PageCourseModules_ = {
+    count_id?: string
     current?: number
-    maxLimit?: number
-    optimizeCountSql?: boolean
+    max_limit?: number
+    optimize_count_sql?: boolean
     orders?: OrderItem[]
     pages?: number
     records?: CourseModules[]
-    searchCount?: boolean
+    search_count?: boolean
     size?: number
     total?: number
   }
 
-  type PageCourseModulesVO = {
-    countId?: string
+  type PageCourseModulesVO_ = {
+    count_id?: string
     current?: number
-    maxLimit?: number
-    optimizeCountSql?: boolean
+    max_limit?: number
+    optimize_count_sql?: boolean
     orders?: OrderItem[]
     pages?: number
     records?: CourseModulesVO[]
-    searchCount?: boolean
+    search_count?: boolean
     size?: number
     total?: number
   }
 
-  type PageCourses = {
-    countId?: string
+  type PageCourses_ = {
+    count_id?: string
     current?: number
-    maxLimit?: number
-    optimizeCountSql?: boolean
+    max_limit?: number
+    optimize_count_sql?: boolean
     orders?: OrderItem[]
     pages?: number
     records?: Courses[]
-    searchCount?: boolean
+    search_count?: boolean
     size?: number
     total?: number
   }
 
-  type PageCoursesVO = {
-    countId?: string
+  type PageCoursesVO_ = {
+    count_id?: string
     current?: number
-    maxLimit?: number
-    optimizeCountSql?: boolean
+    max_limit?: number
+    optimize_count_sql?: boolean
     orders?: OrderItem[]
     pages?: number
     records?: CoursesVO[]
-    searchCount?: boolean
+    search_count?: boolean
     size?: number
     total?: number
   }
 
-  type PageEnrollments = {
-    countId?: string
+  type PageEnrollments_ = {
+    count_id?: string
     current?: number
-    maxLimit?: number
-    optimizeCountSql?: boolean
+    max_limit?: number
+    optimize_count_sql?: boolean
     orders?: OrderItem[]
     pages?: number
     records?: Enrollments[]
-    searchCount?: boolean
+    search_count?: boolean
     size?: number
     total?: number
   }
 
-  type PageEnrollmentsVO = {
-    countId?: string
+  type PageEnrollmentsVO_ = {
+    count_id?: string
     current?: number
-    maxLimit?: number
-    optimizeCountSql?: boolean
+    max_limit?: number
+    optimize_count_sql?: boolean
     orders?: OrderItem[]
     pages?: number
     records?: EnrollmentsVO[]
-    searchCount?: boolean
+    search_count?: boolean
     size?: number
     total?: number
   }
 
-  type PageForumPosts = {
-    countId?: string
+  type PageForumPosts_ = {
+    count_id?: string
     current?: number
-    maxLimit?: number
-    optimizeCountSql?: boolean
+    max_limit?: number
+    optimize_count_sql?: boolean
     orders?: OrderItem[]
     pages?: number
     records?: ForumPosts[]
-    searchCount?: boolean
+    search_count?: boolean
     size?: number
     total?: number
   }
 
-  type PageForumPostsVO = {
-    countId?: string
+  type PageForumPostsVO_ = {
+    count_id?: string
     current?: number
-    maxLimit?: number
-    optimizeCountSql?: boolean
+    max_limit?: number
+    optimize_count_sql?: boolean
     orders?: OrderItem[]
     pages?: number
     records?: ForumPostsVO[]
-    searchCount?: boolean
+    search_count?: boolean
     size?: number
     total?: number
   }
 
-  type PageKnowledgePoints = {
-    countId?: string
+  type PageKnowledgePoints_ = {
+    count_id?: string
     current?: number
-    maxLimit?: number
-    optimizeCountSql?: boolean
+    max_limit?: number
+    optimize_count_sql?: boolean
     orders?: OrderItem[]
     pages?: number
     records?: KnowledgePoints[]
-    searchCount?: boolean
+    search_count?: boolean
     size?: number
     total?: number
   }
 
-  type PageKnowledgePointsVO = {
-    countId?: string
+  type PageKnowledgePointsVO_ = {
+    count_id?: string
     current?: number
-    maxLimit?: number
-    optimizeCountSql?: boolean
+    max_limit?: number
+    optimize_count_sql?: boolean
     orders?: OrderItem[]
     pages?: number
     records?: KnowledgePointsVO[]
-    searchCount?: boolean
+    search_count?: boolean
     size?: number
     total?: number
   }
 
-  type PageQuizQuestions = {
-    countId?: string
+  type PageQuizQuestions_ = {
+    count_id?: string
     current?: number
-    maxLimit?: number
-    optimizeCountSql?: boolean
+    max_limit?: number
+    optimize_count_sql?: boolean
     orders?: OrderItem[]
     pages?: number
     records?: QuizQuestions[]
-    searchCount?: boolean
+    search_count?: boolean
     size?: number
     total?: number
   }
 
-  type PageQuizQuestionsVO = {
-    countId?: string
+  type PageQuizQuestionsVO_ = {
+    count_id?: string
     current?: number
-    maxLimit?: number
-    optimizeCountSql?: boolean
+    max_limit?: number
+    optimize_count_sql?: boolean
     orders?: OrderItem[]
     pages?: number
     records?: QuizQuestionsVO[]
-    searchCount?: boolean
+    search_count?: boolean
     size?: number
     total?: number
   }
 
-  type PageQuizzes = {
-    countId?: string
+  type PageQuizzes_ = {
+    count_id?: string
     current?: number
-    maxLimit?: number
-    optimizeCountSql?: boolean
+    max_limit?: number
+    optimize_count_sql?: boolean
     orders?: OrderItem[]
     pages?: number
     records?: Quizzes[]
-    searchCount?: boolean
+    search_count?: boolean
     size?: number
     total?: number
   }
 
-  type PageQuizzesVO = {
-    countId?: string
+  type PageQuizzesVO_ = {
+    count_id?: string
     current?: number
-    maxLimit?: number
-    optimizeCountSql?: boolean
+    max_limit?: number
+    optimize_count_sql?: boolean
     orders?: OrderItem[]
     pages?: number
     records?: QuizzesVO[]
-    searchCount?: boolean
+    search_count?: boolean
     size?: number
     total?: number
   }
 
-  type PageStudentActivityLogs = {
-    countId?: string
+  type PageRoles_ = {
+    count_id?: string
     current?: number
-    maxLimit?: number
-    optimizeCountSql?: boolean
+    max_limit?: number
+    optimize_count_sql?: boolean
+    orders?: OrderItem[]
+    pages?: number
+    records?: Roles[]
+    search_count?: boolean
+    size?: number
+    total?: number
+  }
+
+  type PageStudentActivityLogs_ = {
+    count_id?: string
+    current?: number
+    max_limit?: number
+    optimize_count_sql?: boolean
     orders?: OrderItem[]
     pages?: number
     records?: StudentActivityLogs[]
-    searchCount?: boolean
+    search_count?: boolean
     size?: number
     total?: number
   }
 
-  type PageStudentActivityLogsVO = {
-    countId?: string
+  type PageStudentActivityLogsVO_ = {
+    count_id?: string
     current?: number
-    maxLimit?: number
-    optimizeCountSql?: boolean
+    max_limit?: number
+    optimize_count_sql?: boolean
     orders?: OrderItem[]
     pages?: number
     records?: StudentActivityLogsVO[]
-    searchCount?: boolean
+    search_count?: boolean
     size?: number
     total?: number
   }
 
   type QuizQuestions = {
+    answer?: string
     is_delete?: number
     options?: Record<string, any>
     points?: number
@@ -1578,6 +1912,7 @@ declare namespace API {
   }
 
   type QuizQuestionsAddRequest = {
+    answer?: string
     options?: Record<string, any>
     points?: number
     question_text?: string
@@ -1591,15 +1926,16 @@ declare namespace API {
 
   type QuizQuestionsQueryRequest = {
     current?: number
-    pageSize?: number
+    page_size?: number
     question_id?: number
     question_type?: string
     quiz_id?: number
-    sortField?: string
-    sortOrder?: string
+    sort_field?: string
+    sort_order?: string
   }
 
   type QuizQuestionsUpdateRequest = {
+    answer?: string
     options?: Record<string, any>
     points?: number
     question_id?: number
@@ -1609,6 +1945,7 @@ declare namespace API {
   }
 
   type QuizQuestionsVO = {
+    answer?: string
     options?: Record<string, any>
     points?: number
     question_id?: number
@@ -1642,10 +1979,10 @@ declare namespace API {
   type QuizzesQueryRequest = {
     class_id?: number
     current?: number
-    pageSize?: number
+    page_size?: number
     quiz_id?: number
-    sortField?: string
-    sortOrder?: string
+    sort_field?: string
+    sort_order?: string
     title?: string
   }
 
@@ -1667,6 +2004,31 @@ declare namespace API {
     title?: string
   }
 
+  type Roles = {
+    description?: string
+    role_id?: number
+    role_name?: string
+  }
+
+  type RolesAddRequest = {
+    description?: string
+    role_name?: string
+  }
+
+  type RolesDeleteRequest = {
+    role_id?: number
+  }
+
+  type RolesQueryRequest = {
+    current?: number
+    description?: string
+    page_size?: number
+    role_id?: number
+    role_name?: string
+    sort_field?: string
+    sort_order?: string
+  }
+
   type StaffLoginRequest = {
     password_hash?: string
     staff_number?: string
@@ -1680,6 +2042,23 @@ declare namespace API {
     password_hash?: string
     staff_number?: string
     title?: string
+  }
+
+  type StaffRoles = {
+    id?: number
+    role_id?: number
+    staff_id?: number
+  }
+
+  type StaffRolesAddRequest = {
+    role_id?: number
+    staff_id?: number
+  }
+
+  type StaffRolesUpdateRequest = {
+    id?: number
+    role_ids?: number[]
+    staff_id?: number
   }
 
   type StudentActivityLogs = {
@@ -1710,9 +2089,9 @@ declare namespace API {
     class_id?: number
     current?: number
     log_id?: number
-    pageSize?: number
-    sortField?: string
-    sortOrder?: string
+    page_size?: number
+    sort_field?: string
+    sort_order?: string
     student_id?: number
   }
 
@@ -1734,7 +2113,19 @@ declare namespace API {
     student_id?: number
   }
 
+  type StudentCoursesVO = {
+    course_id?: number
+    enroll_time?: string
+    id?: number
+    last_study_time?: string
+    progress_percent?: number
+    student_id?: number
+    study_status?: number
+  }
+
   type StudentsLoginRequest = {
+    captcha?: string
+    captcha_key?: string
     password_hash?: string
     student_number?: string
   }
@@ -1748,7 +2139,15 @@ declare namespace API {
     student_number?: string
   }
 
-  type View = {
-    contentType?: string
+  type updateProgressUsingPOSTParams = {
+    /** courseId */
+    courseId: number
+    /** progress */
+    progress: number
+  }
+
+  type updateVisitUsingPOSTParams = {
+    /** courseId */
+    courseId: number
   }
 }

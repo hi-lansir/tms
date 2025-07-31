@@ -1,563 +1,260 @@
 <template>
-  <div class="course-study-page">
-    <!-- 顶部导航 -->
-    <div class="study-header">
-      <a-row align="middle">
-        <a-col :span="18">
-          <h1 class="course-title">{{ currentCourse.title }}</h1>
-        </a-col>
-        <a-col :span="6" class="text-right">
-          <a-button type="primary" @click="goBack">
-            <arrow-left-outlined /> 返回课程详情
-          </a-button>
-        </a-col>
-      </a-row>
-    </div>
-
-    <!-- 主要内容区 -->
-    <a-row class="study-content" :gutter="[24, 24]">
-      <!-- 左侧学习资源区 -->
-      <a-col :xs="24" :lg="16">
-        <a-card class="resource-card">
-          <!-- 资源标签页 -->
-          <a-tabs v-model:activeKey="activeResourceTab" class="resource-tabs">
-            <a-tab-pane key="video" tab="视频学习" />
-            <a-tab-pane key="document" tab="文档资料" />
-            <a-tab-pane key="assignment" tab="相关练习" />
-            <a-tab-pane key="discussion" tab="留言讨论" />
-          </a-tabs>
-
-          <!-- 视频学习区 -->
-          <div v-if="activeResourceTab === 'video'" class="video-container">
-            <div class="video-player">
-              <div class="placeholder">视频播放器</div>
-              <video-poster :src="currentLesson.videoPoster" alt="课程视频封面"></video-poster>
-            </div>
-            <div class="video-info">
-              <h3>{{ currentLesson.title }}</h3>
-              <p class="lesson-desc">{{ currentLesson.description }}</p>
-              <div class="video-controls">
-                <a-button @click="playPrevious"><step-backward-outlined /> 上一课时</a-button>
-                <a-button @click="togglePlay">{{ isPlaying ? '暂停' : '播放' }}</a-button>
-                <a-button @click="playNext">下一课时 <step-forward-outlined /></a-button>
-                <a-divider type="vertical" />
-                <a-button type="primary" @click="markAsCompleted">\ <check-circle-outlined /> {{
-                  currentLesson.isCompleted ? '已完成' : '标记为已完成' }}\ </a-button>
-              </div>
-            </div>
+  <a-layout class="course-study-layout">
+    <!-- 左侧学习资源区域 -->
+    <a-layout-sider width="70%" :style="{ background: '#fff' }">
+      <div class="resource-container">
+        <!-- 视频资源 -->
+        <a-card class="resource-card" title="课程视频">
+          <div class="video-placeholder">
+            <a-spin size="large" tip="加载视频中..." />
           </div>
-
-          <!-- 文档资料区 -->
-          <div v-if="activeResourceTab === 'document'" class="document-container">
-            <a-card title="课程文档">\ <div class="document-content" v-html="currentLesson.documentContent"></div>
-              <div class="document-actions" style="margin-top: 20px;">
-                <a-button icon={<download-outlined />}>下载文档</a-button>
-              </div>
-            </a-card>
+          <div class="resource-info">
+            <h3>Vue.js 基础入门 - 组件化开发</h3>
+            <p>本节将学习Vue.js的组件化开发思想和实践方法，包括组件通信、生命周期等核心概念。</p>
           </div>
-
-          <!-- 相关练习区 -->
-          <div v-if="activeResourceTab === 'assignment'" class="assignment-container">
-            <a-list item-layout="vertical" :data-source="currentLesson.assignments" :render-item="(item) => {
-              return (
-                <a-list - item >
-                <a-list - item - meta
-        title = {< a href = '#' > { item.title } </>
-            }
-        description = {`截止日期: ${item.deadline}`}
-      />
-              < div class='assignment-status' >
-                <a-badge : status = 'item.status === " completed" ? "success" : "processing"' :text='item.status === "completed" ? "已完成" : "未完成"'></a-badge>
-        <a-button size=' small' style='margin-left: 10px;'>开始做</a-button>
+          <!-- 标签 -->
+          <div class="resource-tags">
+            <a-tag color="blue">Vue.js</a-tag>
+            <a-tag color="green">组件化</a-tag>
+            <a-tag color="orange">前端开发</a-tag>
           </div>
-          </a-list-item>
-          )
-          }" />
-  </div>
+          <!-- 关联资源 -->
+          <div class="related-resources">
+            <h4>关联资源</h4>
+            <a-list size="small">
+              <a-list-item><a href="#">组件化开发文档</a></a-list-item>
+              <a-list-item><a href="#">Vue生命周期图解</a></a-list-item>
+              <a-list-item><a href="#">组件通信示例代码</a></a-list-item>
+            </a-list>
+          </div>
+        </a-card>
 
-  <!-- 留言讨论区 -->
-  <div v-if="activeResourceTab === 'discussion'" class="discussion-container">
-    <div class="discussion-input">
-      <a-textarea placeholder="写下你的疑问或想法..." v-model:value="newComment" rows="3"></a-textarea>
-      <div class="discussion-actions" style="margin-top: 10px; text-align: right;">
-        <a-button type="primary" @click="submitComment">发布留言</a-button>
-      </div>
-    </div>
-    <a-divider>讨论区 ({{ comments.length }})</a-divider>
-    <a-list item-layout="horizontal" :data-source="comments" :render-item="(item) => {
-      return (
-        <a-list - item >
-        <a-list - item - meta
-        avatar = {< a - avatar : src = 'item.avatar' />}
-        title = { item.author }
-    description = { item.time }
-      />
-      <div class='comment-content' > { item.content } </div>
-        < div class='comment-actions' >
-          <a @click='replyToComment(item)' > 回复 </a>
-            < a - divider type = 'vertical' />
-              <a @click='likeComment(item)' > { item.likes } < like - outlined /> </a>
-                </>
+        <!-- 切换区域：讨论区/练习区 -->
+        <a-tabs default-active-key="discussion" class="content-tabs">
+          <a-tab-pane key="discussion" tab="留言讨论区">
+            <a-list item-layout="horizontal" :data-source="discussionList" class="discussion-list">
+              <template #renderItem="item">
+                <a-list-item>
+                  <a-list-item-meta>
+                    title={<a>{{ item.author }}</a>}
+                    :description="item.content"
+                    <template #avatar>
+                      <a-avatar :src="item.avatar" />
+                    </template>
+                  </a-list-item-meta>
+                  <div class="discussion-time">{{ item.time }}</div>
                 </a-list-item>
-  )
-}
-    </div>
-      </a-card>
-      </a-col>
+              </template>
+            </a-list>
+            <a-input placeholder="写下你的疑问或想法..." class="discussion-input" />
+          </a-tab-pane>
+          <a-tab-pane key="exercises" tab="相关练习">
+            <a-list :data-source="exercises" class="exercises-list">
+              <template #renderItem="item">
+                <a-list-item>
+                  <a-list-item-meta :description="item.description">
+                    <template #title>
+                      <a>{{ item.title }}</a>
+                    </template>
+                  </a-list-item-meta>
+                  <a-tag :color="item.status === 'completed' ? 'green' : 'gold'">
+                    {{ item.status === 'completed' ? '已完成' : '待完成' }}
+                  </a-tag>
+                </a-list-item>
+              </template>
+            </a-list>
+          </a-tab-pane>
+        </a-tabs>
+      </div>
+    </a-layout-sider>
 
-      < !--右侧章节导航区 -->
-        <a-col : xs =" 24" :lg="8">
-      <a-card class="chapters-card" title="课程章节">
-        <a-tree v-model:expandedKeys="expandedChapters" v-model:selectedKeys="selectedChapterKey"
-          :tree-data="courseChapters" :default-expand-all="true" @select="onChapterSelect" />
+    <!-- 右侧章节区域 -->
+    <a-layout-content :style="{ background: '#f0f2f5', padding: '24px' }">
+      <a-card title="课程章节">
+        <a-tree v-model:expandedKeys="expandedKeys" :tree-data="chapterData" :default-expand-all="true">
+          <template #title="{ title, data }">
+            <span class="chapter-title" style="display: flex; align-items: center;">
+              <span>{{ title }}</span>
+              <template v-if="data.status === 'completed'">
+                <a-tag color="green" size="small" style="margin-left: 8px;">已完成</a-tag>
+              </template>
+              <template v-else-if="data.status === 'in-progress'">
+                <a-tag color="gold" size="small" style="margin-left: 8px;">进行中</a-tag>
+              </template>
+              <template v-else-if="data.status === 'not-started'">
+                <a-tag color="gray" size="small" style="margin-left: 8px;">未开始</a-tag>
+              </template>
+            </span>
+          </template>
+        </a-tree>
       </a-card>
-
-      <!-- 学习进度 -->
-      <a-card class="progress-card" style="margin-top: 20px;">
-        <div class="progress-info">
-          <h3>学习进度</h3>
-          <p>{{ completedLessons }}/{{ totalLessons }} 课时 ({{ progressPercentage }}%)</p>
-        </div>
-        <a-progress :percent="progressPercentage" status="active" />
-      </a-card>
-      </a-col>
-      </a-row>
-  </div>
+    </a-layout-content>
+  </a-layout>
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue';
-import { useRouter } from 'vue-router';
-import { message } from 'ant-design-vue';
-import {
-  ArrowLeftOutlined,
-  StepBackwardOutlined,
-  StepForwardOutlined,
-  CheckCircleOutlined,
-  DownloadOutlined,
-  LikeOutlined
-} from '@ant-design/icons-vue';
-import { ARow, ACol, AButton, ATabs, ATabPane, ACard, ATree, AProgress, AList, ABadge, ATextarea, ADivider, AAvatar } from 'ant-design-vue';
+import { ref } from 'vue';
+import { Layout, Card, Tree, Tabs, List, Input, Tag, Avatar, Spin } from 'ant-design-vue';
 
-// 路由相关
-const router = useRouter();
 
-// 状态管理
-const activeResourceTab = ref<string>('video');
-const expandedChapters = ref<string[]>(['1', '1-1']); // 默认展开的章节
-const selectedChapterKey = ref<string[]>(['1-1-1']); // 默认选中的课时
-const isPlaying = ref<boolean>(false);
-const newComment = ref<string>('');
-
-// 模拟课程数据
-const currentCourse = ref<any>({
-  id: 1,
-  title: 'Vue3+TypeScript开发实战',
-  chapters: [
-    {
-      key: '1',
-      title: 'Vue3基础入门',
-      children: [
-        {
-          key: '1-1',
-          title: '第1节：Vue3简介与环境搭建',
-          children: [
-            {
-              key: '1-1-1',
-              title: '1.1.1 Vue3新特性介绍',
-              isCompleted: true,
-              type: 'lesson'
-            },
-            {
-              key: '1-1-2',
-              title: '1.1.2 开发环境搭建',
-              isCompleted: true,
-              type: 'lesson'
-            },
-            {
-              key: '1-1-3',
-              title: '1.1.3 Vue CLI使用指南',
-              isCompleted: false,
-              type: 'lesson'
-            }
-          ]
-        },
-        {
-          key: '1-2',
-          title: '第2节：Vue3模板语法',
-          children: [
-            {
-              key: '1-2-1',
-              title: '1.2.1 插值表达式',
-              isCompleted: false,
-              type: 'lesson'
-            },
-            {
-              key: '1-2-2',
-              title: '1.2.2 指令系统',
-              isCompleted: false,
-              type: 'lesson'
-            }
-          ]
-        }
-      ]
-    },
-    {
-      key: '2',
-      title: 'TypeScript集成应用',
-      children: [
-        {
-          key: '2-1',
-          title: '第1节：TypeScript基础',
-          children: [
-            {
-              key: '2-1-1',
-              title: '2.1.1 TypeScript简介',
-              isCompleted: false,
-              type: 'lesson'
-            },
-            {
-              key: '2-1-2',
-              title: '2.1.2 基本类型定义',
-              isCompleted: false,
-              type: 'lesson'
-            }
-          ]
-        }
-      ]
-    }
-  ]
-});
-
-// 当前课时数据
-const currentLesson = ref<any>({
-  id: '1-1-3',
-  title: '1.1.3 Vue CLI使用指南',
-  description: '本节介绍Vue CLI的安装、配置和常用命令，帮助你快速搭建Vue项目',
-  videoPoster: 'https://picsum.photos/seed/vuecli/1200/675',
-  duration: '25:30',
-  isCompleted: false,
-  documentContent: `<h3>Vue CLI使用指南</h3><p>Vue CLI是一个基于Vue.js进行快速开发的完整系统。</p><h4>安装步骤：</h4><ol><li>安装Node.js</li><li>npm install -g @vue/cli</li><li>vue create my-project</li></ol><h4>常用命令：</h4><ul><li>vue serve</li><li>vue build</li><li>vue ui</li></ul>`,
-  assignments: [
-    {
-      id: 1,
-      title: 'Vue CLI安装与项目创建',
-      deadline: '2023-12-31',
-      status: 'completed'
-    },
-    {
-      id: 2,
-      title: 'Vue项目配置练习',
-      deadline: '2023-12-31',
-      status: 'pending'
-    }
-  ]
-});
-
-// 讨论区数据
-const comments = ref<any[]>([
+// 章节数据
+const chapterData = ref([
   {
-    id: 1,
-    author: '张三',
-    avatar: 'https://picsum.photos/seed/user1/100/100',
-    time: '2小时前',
-    content: '请问Vue CLI和Vite有什么区别？',
-    likes: 5
+    title: '第1章：Vue.js基础',
+    key: '1',
+    children: [
+      {
+        title: '1.1 Vue.js介绍',
+        key: '1-1',
+        status: 'completed'
+      },
+      {
+        title: '1.2 环境搭建',
+        key: '1-2',
+        status: 'completed'
+      },
+      {
+        title: '1.3 基本语法',
+        key: '1-3',
+        status: 'completed'
+      }
+    ]
   },
   {
-    id: 2,
-    author: '李四',
-    avatar: 'https://picsum.photos/seed/user2/100/100',
-    time: '1小时前',
-    content: '这节课讲得很详细，谢谢老师！',
-    likes: 3
+    title: '第2章：组件化开发',
+    key: '2',
+    children: [
+      {
+        title: '2.1 组件基础',
+        key: '2-1',
+        status: 'completed'
+      },
+      {
+        title: '2.2 组件通信',
+        key: '2-2',
+        status: 'in-progress'
+      },
+      {
+        title: '2.3 组件生命周期',
+        key: '2-3',
+        status: 'not-started'
+      }
+    ]
+  },
+  {
+    title: '第3章：路由与状态管理',
+    key: '3',
+    children: [
+      {
+        title: '3.1 Vue Router',
+        key: '3-1',
+        status: 'not-started'
+      },
+      {
+        title: '3.2 Vuex/Pinia',
+        key: '3-2',
+        status: 'not-started'
+      }
+    ]
   }
 ]);
 
-// 计算属性：课程章节树结构
-const courseChapters = computed(() => {
-  // 格式化章节数据，添加完成状态标记
-  const formatChapter = (chapters: any[]) => {
-    return chapters.map(chapter => {
-      let title = chapter.title;
-      // 如果是课时，添加完成状态标记
-      if (chapter.type === 'lesson') {
-        title = `${title} ${chapter.isCompleted ? '✓' : ''}`;
-      }
-      return {
-        ...chapter,
-        title,
-        children: chapter.children ? formatChapter(chapter.children) : undefined
-      };
-    });
-  };
-  return formatChapter(currentCourse.value.chapters);
-});
+// 展开的节点
+const expandedKeys = ref(['1', '2', '3']);
 
-// 计算属性：学习进度
-const totalLessons = computed(() => {
-  // 递归计算总课时数
-  const countLessons = (chapters: any[]) => {
-    let count = 0;
-    chapters.forEach(chapter => {
-      if (chapter.type === 'lesson') {
-        count++;
-      } else if (chapter.children) {
-        count += countLessons(chapter.children);
-      }
-    });
-    return count;
-  };
-  return countLessons(currentCourse.value.chapters);
-});
-
-// 计算属性：已完成课时数
-const completedLessons = computed(() => {
-  // 递归计算已完成课时数
-  const countCompleted = (chapters: any[]) => {
-    let count = 0;
-    chapters.forEach(chapter => {
-      if (chapter.type === 'lesson' && chapter.isCompleted) {
-        count++;
-      } else if (chapter.children) {
-        count += countCompleted(chapter.children);
-      }
-    });
-    return count;
-  };
-  return countCompleted(currentCourse.value.chapters);
-});
-
-// 计算属性：进度百分比
-const progressPercentage = computed(() => {
-  return Math.round((completedLessons.value / totalLessons.value) * 100);
-});
-
-// 方法：章节选择
-const onChapterSelect = (selectedKeys: string[], info: any) => {
-  if (info.node.dataRef.type === 'lesson') {
-    // 这里可以根据选择的课时key加载对应的课时数据
-    console.log('选择课时:', selectedKeys[0]);
-    // 在实际应用中，这里会调用API获取课时详情
-    // 这里仅做演示，不改变当前课时
+// 讨论区数据
+const discussionList = ref([
+  {
+    author: '张三',
+    avatar: 'https://joeschmoe.io/api/v1/random',
+    content: '请问组件通信除了props和emit还有其他方式吗？',
+    time: '2小时前'
+  },
+  {
+    author: '李四',
+    avatar: 'https://joeschmoe.io/api/v1/random',
+    content: '视频里讲的生命周期钩子函数很清晰，谢谢老师！',
+    time: '昨天'
   }
-};
+]);
 
-// 方法：播放/暂停视频
-const togglePlay = () => {
-  isPlaying.value = !isPlaying.value;
-};
-
-// 方法：上一课时
-const playPrevious = () => {
-  message.info('播放上一课时');
-  // 实际应用中这里会切换到上一课时
-};
-
-// 方法：下一课时
-const playNext = () => {
-  message.info('播放下一课时');
-  // 实际应用中这里会切换到下一课时
-};
-
-// 方法：标记为已完成
-const markAsCompleted = () => {
-  currentLesson.value.isCompleted = !currentLesson.value.isCompleted;
-  message.success(currentLesson.value.isCompleted ? '标记成功' : '取消标记成功');
-};
-
-// 方法：提交评论
-const submitComment = () => {
-  if (!newComment.value.trim()) {
-    message.warning('请输入评论内容');
-    return;
+// 练习数据
+const exercises = ref([
+  {
+    title: '组件化基础练习',
+    description: '创建一个简单的计数器组件，实现加减功能',
+    status: 'completed'
+  },
+  {
+    title: '组件通信练习',
+    description: '实现父子组件之间的数据传递和事件触发',
+    status: 'completed'
+  },
+  {
+    title: '生命周期练习',
+    description: '使用生命周期钩子函数实现数据加载和清理',
+    status: 'not-started'
   }
-  // 添加新评论
-  comments.value.unshift({
-    id: comments.value.length + 1,
-    author: '当前用户',
-    avatar: 'https://picsum.photos/seed/currentuser/100/100',
-    time: '刚刚',
-    content: newComment.value,
-    likes: 0
-  });
-  // 清空输入框
-  newComment.value = '';
-  message.success('评论发布成功');
-};
-
-// 方法：回复评论
-const replyToComment = (comment: any) => {
-  message.info(`回复 ${comment.author}`);
-  // 实际应用中这里会打开回复框
-};
-
-// 方法：点赞评论
-const likeComment = (comment: any) => {
-  comment.likes++;
-};
-
-// 方法：返回课程详情
-const goBack = () => {
-  router.push('/students/courses/details');
-};
+]);
 </script>
 
 <style scoped>
-.course-study-page {
-  padding: 20px;
-  max-width: 1400px;
-  margin: 0 auto;
+.course-study-layout {
+  min-height: 100vh;
 }
 
-.study-header {
-  margin-bottom: 20px;
+.resource-container {
+  padding: 24px;
 }
 
-.course-title {
-  margin: 0;
-  font-size: 24px;
-  color: #1a1a1a;
+.resource-card {
+  margin-bottom: 24px;
 }
 
-.study-content {
-  margin-top: 20px;
-}
-
-.resource-card,
-.chapters-card,
-.progress-card {
-  height: 100%;
-}
-
-.video-container {
-  padding: 10px 0;
-}
-
-.video-player {
-  width: 100%;
-  height: 400px;
-  background-color: #000;
-  border-radius: 8px;
+.video-placeholder {
+  height: 360px;
+  background: #f5f5f5;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 20px;
-  position: relative;
-}
-
-.placeholder {
-  color: #fff;
-  font-size: 18px;
-}
-
-.video-info h3 {
-  margin-top: 0;
-  margin-bottom: 10px;
-}
-
-.lesson-desc {
-  color: #666;
-  margin-bottom: 20px;
-  line-height: 1.6;
-}
-
-.video-controls {
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
-  align-items: center;
-}
-
-.document-container,
-.assignment-container,
-.discussion-container {
-  padding: 10px;
-}
-
-.document-content {
-  line-height: 1.8;
-  color: #333;
-}
-
-.document-content h3,
-.document-content h4 {
-  margin: 16px 0 8px;
-}
-
-.document-content ol,
-.document-content ul {
-  padding-left: 24px;
   margin-bottom: 16px;
 }
 
-.discussion-input {
-  margin-bottom: 20px;
+.resource-info {
+  margin-bottom: 16px;
 }
 
-.comment-content {
+.resource-tags {
+  margin-bottom: 24px;
+}
+
+.related-resources h4 {
   margin-bottom: 8px;
-  flex: 1;
-}
-
-.comment-actions {
-  display: flex;
-  gap: 16px;
-  color: #999;
-  font-size: 14px;
-}
-
-.comment-actions a {
-  color: #999;
-  transition: color 0.2s;
-}
-
-.comment-actions a:hover {
-  color: #1890ff;
-}
-
-.progress-info {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 10px;
-}
-
-.progress-info h3 {
-  margin: 0;
   font-size: 16px;
 }
 
-.progress-info p {
-  margin: 0;
-  color: #666;
+.content-tabs {
+  margin-top: 24px;
 }
 
-/* 章节树样式 */
-.ant-tree-node-content-wrapper {
-  padding: 4px 0;
+.discussion-list {
+  margin-bottom: 16px;
+  max-height: 400px;
+  overflow-y: auto;
 }
 
-.ant-tree-node-selected .ant-tree-node-content-wrapper {
-  background-color: #f0f7ff;
-  color: #1890ff;
+.discussion-input {
+  width: 100%;
 }
 
-/* 响应式调整 */
-@media (max-width: 992px) {
-  .video-player {
-    height: 300px;
-  }
+.exercises-list {
+  max-height: 400px;
+  overflow-y: auto;
 }
 
-@media (max-width: 576px) {
-  .video-player {
-    height: 200px;
-  }
-
-  .video-controls {
-    flex-direction: column;
-    align-items: stretch;
-  }
+.chapter-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 </style>

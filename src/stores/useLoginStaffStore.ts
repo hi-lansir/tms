@@ -21,12 +21,14 @@ export const useLoginStaffStore = defineStore('loginStaff', {
     isLogin: (state) => !!state.token,
   },
   actions: {
-    setToken(token: string | null) {
+    setToken(token: string | null, tokenName: string | null) {
       this.token = token
       if (token) {
         localStorage.setItem('staff_token', token)
+        localStorage.setItem('staff_tokenName', tokenName || '')
       } else {
         localStorage.removeItem('staff_token')
+        localStorage.removeItem('staff_tokenName')
       }
     },
     async fetchLoginStaff() {
@@ -39,12 +41,12 @@ export const useLoginStaffStore = defineStore('loginStaff', {
           this.staffInfo = response.data.data
         } else {
           // 令牌无效，清除登录状态
-          this.setToken(null)
+          this.setToken(null, null)
           this.staffInfo = null
         }
       } catch (error) {
         console.error('获取教职工信息失败', error)
-        this.setToken(null)
+        this.setToken(null, null)
         this.staffInfo = null
       } finally {
         this.isLoading = false
@@ -56,7 +58,7 @@ export const useLoginStaffStore = defineStore('loginStaff', {
       } catch (error) {
         console.error('登出失败', error)
       } finally {
-        this.setToken(null)
+        this.setToken(null, null)
         this.staffInfo = null
       }
     },

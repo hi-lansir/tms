@@ -7,7 +7,7 @@ export async function addQuizzesUsingPost(
   body: API.QuizzesAddRequest,
   options?: { [key: string]: any }
 ) {
-  return request<API.BaseResponseint>('/api/quizzes/add', {
+  return request<API.BaseResponseInt_>('/api/quizzes/add', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -22,7 +22,7 @@ export async function deleteQuizzesUsingPost(
   body: API.QuizzesDeleteRequest,
   options?: { [key: string]: any }
 ) {
-  return request<API.BaseResponseboolean>('/api/quizzes/delete', {
+  return request<API.BaseResponseBoolean_>('/api/quizzes/delete', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -38,7 +38,7 @@ export async function getQuizzesByIdUsingGet(
   params: API.getQuizzesByIdUsingGETParams,
   options?: { [key: string]: any }
 ) {
-  return request<API.BaseResponseQuizzes>('/api/quizzes/get', {
+  return request<API.BaseResponseQuizzes_>('/api/quizzes/get', {
     method: 'GET',
     params: {
       ...params,
@@ -53,7 +53,7 @@ export async function getQuizzesVoByIdUsingGet(
   params: API.getQuizzesVOByIdUsingGETParams,
   options?: { [key: string]: any }
 ) {
-  return request<API.BaseResponseQuizzesVO>('/api/quizzes/get/vo', {
+  return request<API.BaseResponseQuizzesVO_>('/api/quizzes/get/vo', {
     method: 'GET',
     params: {
       ...params,
@@ -67,7 +67,7 @@ export async function listQuizzesByPageUsingPost(
   body: API.QuizzesQueryRequest,
   options?: { [key: string]: any }
 ) {
-  return request<API.BaseResponsePageQuizzes>('/api/quizzes/list/page', {
+  return request<API.BaseResponsePageQuizzes_>('/api/quizzes/list/page', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -82,7 +82,7 @@ export async function listQuizzesVoByPageUsingPost(
   body: API.QuizzesQueryRequest,
   options?: { [key: string]: any }
 ) {
-  return request<API.BaseResponsePageQuizzesVO>('/api/quizzes/list/page/vo', {
+  return request<API.BaseResponsePageQuizzesVO_>('/api/quizzes/list/page/vo', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -97,7 +97,7 @@ export async function updateQuizzesUsingPost(
   body: API.QuizzesUpdateRequest,
   options?: { [key: string]: any }
 ) {
-  return request<API.BaseResponseboolean>('/api/quizzes/update', {
+  return request<API.BaseResponseBoolean_>('/api/quizzes/update', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

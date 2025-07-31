@@ -42,13 +42,12 @@ import { useLoginStudentStore } from '@/stores/useLoginStudentStore'
 import { getLoginStudentsUsingPost as getLoginStudents } from '@/api/studentsController'
 
 const loginStore = useLoginStudentStore()
-const studentInfo = reactive<API.StudentInfoVO>({
+const studentInfo = reactive<API.LoginStudentsVO>({
   student_number: '',
-  name: '',
+  first_name: '',
+  last_name: '',
   email: '',
-  phone: '',
-  major: '',
-  class_name: ''
+  department_id: 0,
 })
 
 onMounted(async () => {

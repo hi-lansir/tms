@@ -15,12 +15,16 @@
   },
   "dependencies": {
     "@ant-design/icons-vue": "^7.0.1",
+    "@vue/babel-plugin-jsx": "^1.4.0",
+    "@vue/runtime-core": "^3.5.17",
+    "@vueuse/core": "^13.5.0",
     "ant-design-vue": "^4.2.6",
     "axios": "^1.10.0",
     "echarts": "^5.6.0",
     "pinia": "^3.0.3",
     "tslib": "^2.8.1",
     "vue": "^3.5.17",
+    "vue-echarts": "^7.0.3",
     "vue-router": "^4.5.1"
   },
   "devDependencies": {

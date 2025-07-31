@@ -7,7 +7,7 @@ export async function addStudentActivityLogsUsingPost(
   body: API.StudentActivityLogsAddRequest,
   options?: { [key: string]: any }
 ) {
-  return request<API.BaseResponselong>('/api/studentActivityLogs/add', {
+  return request<API.BaseResponseLong_>('/api/studentActivityLogs/add', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -22,7 +22,7 @@ export async function deleteStudentActivityLogsUsingPost(
   body: API.StudentActivityLogsDeleteRequest,
   options?: { [key: string]: any }
 ) {
-  return request<API.BaseResponseboolean>('/api/studentActivityLogs/delete', {
+  return request<API.BaseResponseBoolean_>('/api/studentActivityLogs/delete', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -38,7 +38,7 @@ export async function getStudentActivityLogsByIdUsingGet(
   params: API.getStudentActivityLogsByIdUsingGETParams,
   options?: { [key: string]: any }
 ) {
-  return request<API.BaseResponseStudentActivityLogs>('/api/studentActivityLogs/get', {
+  return request<API.BaseResponseStudentActivityLogs_>('/api/studentActivityLogs/get', {
     method: 'GET',
     params: {
       ...params,
@@ -53,7 +53,7 @@ export async function getStudentActivityLogsVoByIdUsingGet(
   params: API.getStudentActivityLogsVOByIdUsingGETParams,
   options?: { [key: string]: any }
 ) {
-  return request<API.BaseResponseStudentActivityLogsVO>('/api/studentActivityLogs/get/vo', {
+  return request<API.BaseResponseStudentActivityLogsVO_>('/api/studentActivityLogs/get/vo', {
     method: 'GET',
     params: {
       ...params,
@@ -67,7 +67,7 @@ export async function listStudentActivityLogsByPageUsingPost(
   body: API.StudentActivityLogsQueryRequest,
   options?: { [key: string]: any }
 ) {
-  return request<API.BaseResponsePageStudentActivityLogs>('/api/studentActivityLogs/list/page', {
+  return request<API.BaseResponsePageStudentActivityLogs_>('/api/studentActivityLogs/list/page', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -82,7 +82,7 @@ export async function listStudentActivityLogsVoByPageUsingPost(
   body: API.StudentActivityLogsQueryRequest,
   options?: { [key: string]: any }
 ) {
-  return request<API.BaseResponsePageStudentActivityLogsVO>(
+  return request<API.BaseResponsePageStudentActivityLogsVO_>(
     '/api/studentActivityLogs/list/page/vo',
     {
       method: 'POST',
@@ -100,7 +100,7 @@ export async function updateStudentActivityLogsUsingPost(
   body: API.StudentActivityLogsUpdateRequest,
   options?: { [key: string]: any }
 ) {
-  return request<API.BaseResponseboolean>('/api/studentActivityLogs/update', {
+  return request<API.BaseResponseBoolean_>('/api/studentActivityLogs/update', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

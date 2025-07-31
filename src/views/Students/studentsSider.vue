@@ -32,7 +32,7 @@
 
 <script lang="ts" setup>
 import { ref } from 'vue';
-import { HomeOutlined, UserOutlined, AlignLeftOutlined, EditOutlined, SettingFilled } from '@ant-design/icons-vue';
+import { HomeOutlined, UserOutlined, AlignLeftOutlined, EditOutlined, ThunderboltOutlined, CommentOutlined, ReadOutlined } from '@ant-design/icons-vue';
 
 const selectedKeys = ref(['1']);
 
@@ -46,8 +46,8 @@ const menuItems = [
   },
   {
     key: '2',
-    icon: SettingFilled,
-    label: '设置',
+    icon: ThunderboltOutlined,
+    label: '考勤',
     path: '/student'
   },
   {
@@ -66,19 +66,20 @@ const menuItems = [
     label: '练习与考核',
     path: '/student/exams',
     children: [
-      { key: '4-1', label: '考试安排', path: '/student/exams/schedule' },
-      { key: '4-2', label: '我的成绩', path: '/student/exams/results' }
+      { key: '4-1', label: '练习', path: '/student/exams/practice' },
+      { key: '4-2', label: '考试安排', path: '/student/exams/schedule' },
+      { key: '4-3', label: '我的成绩', path: '/student/exams/results' }
     ]
   },
   {
     key: '5',
-    icon: EditOutlined,
+    icon: ReadOutlined,
     label: '知识与资源',
-    path: '/student'
+    path: '/student/knowledge'
   },
   {
     key: '6',
-    icon: UserOutlined,
+    icon: CommentOutlined,
     label: '讨论互动',
     path: '/student'
   },
@@ -86,7 +87,12 @@ const menuItems = [
     key: '7',
     icon: UserOutlined,
     label: '个人中心',
-    path: '/student'
+    path: '/student',
+    children: [
+      { key: '7-1', label: '个人信息', path: '/student/profile' },
+      { key: '7-2', label: '设置', path: '/student/settings' },
+      { key: '7-3', label: '行为日志', path: '/student/logs' }
+    ]
   },
 ];
 </script>

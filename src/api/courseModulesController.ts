@@ -7,7 +7,7 @@ export async function addCourseModulesUsingPost(
   body: API.CourseModulesAddRequest,
   options?: { [key: string]: any }
 ) {
-  return request<API.BaseResponseint>('/api/courseModules/add', {
+  return request<API.BaseResponseInt_>('/api/courseModules/add', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -22,7 +22,7 @@ export async function deleteCourseModulesUsingPost(
   body: API.CourseModulesDeleteRequest,
   options?: { [key: string]: any }
 ) {
-  return request<API.BaseResponseboolean>('/api/courseModules/delete', {
+  return request<API.BaseResponseBoolean_>('/api/courseModules/delete', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -38,7 +38,7 @@ export async function getCourseModulesByIdUsingGet(
   params: API.getCourseModulesByIdUsingGETParams,
   options?: { [key: string]: any }
 ) {
-  return request<API.BaseResponseCourseModules>('/api/courseModules/get', {
+  return request<API.BaseResponseCourseModules_>('/api/courseModules/get', {
     method: 'GET',
     params: {
       ...params,
@@ -53,7 +53,7 @@ export async function getCourseModulesVoByIdUsingGet(
   params: API.getCourseModulesVOByIdUsingGETParams,
   options?: { [key: string]: any }
 ) {
-  return request<API.BaseResponseCourseModulesVO>('/api/courseModules/get/vo', {
+  return request<API.BaseResponseCourseModulesVO_>('/api/courseModules/get/vo', {
     method: 'GET',
     params: {
       ...params,
@@ -67,7 +67,7 @@ export async function listCourseModulesByPageUsingPost(
   body: API.CourseModulesQueryRequest,
   options?: { [key: string]: any }
 ) {
-  return request<API.BaseResponsePageCourseModules>('/api/courseModules/list/page', {
+  return request<API.BaseResponsePageCourseModules_>('/api/courseModules/list/page', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -82,7 +82,7 @@ export async function listCourseModulesVoByPageUsingPost(
   body: API.CourseModulesQueryRequest,
   options?: { [key: string]: any }
 ) {
-  return request<API.BaseResponsePageCourseModulesVO>('/api/courseModules/list/page/vo', {
+  return request<API.BaseResponsePageCourseModulesVO_>('/api/courseModules/list/page/vo', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -97,7 +97,7 @@ export async function updateCourseModulesUsingPost(
   body: API.CourseModulesUpdateRequest,
   options?: { [key: string]: any }
 ) {
-  return request<API.BaseResponseboolean>('/api/courseModules/update', {
+  return request<API.BaseResponseBoolean_>('/api/courseModules/update', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

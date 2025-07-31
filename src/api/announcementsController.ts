@@ -7,7 +7,7 @@ export async function addAnnouncementsUsingPost(
   body: API.AnnouncementsAddRequest,
   options?: { [key: string]: any }
 ) {
-  return request<API.BaseResponseint>('/api/announcements/add', {
+  return request<API.BaseResponseInt_>('/api/announcements/add', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -22,7 +22,7 @@ export async function deleteAnnouncementsUsingPost(
   body: API.AnnouncementsDeleteRequest,
   options?: { [key: string]: any }
 ) {
-  return request<API.BaseResponseboolean>('/api/announcements/delete', {
+  return request<API.BaseResponseBoolean_>('/api/announcements/delete', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -38,7 +38,7 @@ export async function getAnnouncementsByIdUsingGet(
   params: API.getAnnouncementsByIdUsingGETParams,
   options?: { [key: string]: any }
 ) {
-  return request<API.BaseResponseAnnouncements>('/api/announcements/get', {
+  return request<API.BaseResponseAnnouncements_>('/api/announcements/get', {
     method: 'GET',
     params: {
       ...params,
@@ -53,7 +53,7 @@ export async function getAnnouncementsVoByIdUsingGet(
   params: API.getAnnouncementsVOByIdUsingGETParams,
   options?: { [key: string]: any }
 ) {
-  return request<API.BaseResponseAnnouncementsVO>('/api/announcements/get/vo', {
+  return request<API.BaseResponseAnnouncementsVO_>('/api/announcements/get/vo', {
     method: 'GET',
     params: {
       ...params,
@@ -67,7 +67,7 @@ export async function listAnnouncementsByPageUsingPost(
   body: API.AnnouncementsQueryRequest,
   options?: { [key: string]: any }
 ) {
-  return request<API.BaseResponsePageAnnouncements>('/api/announcements/list/page', {
+  return request<API.BaseResponsePageAnnouncements_>('/api/announcements/list/page', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -82,7 +82,7 @@ export async function listAnnouncementsVoByPageUsingPost(
   body: API.AnnouncementsQueryRequest,
   options?: { [key: string]: any }
 ) {
-  return request<API.BaseResponsePageAnnouncementsVO>('/api/announcements/list/page/vo', {
+  return request<API.BaseResponsePageAnnouncementsVO_>('/api/announcements/list/page/vo', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -97,7 +97,7 @@ export async function updateAnnouncementsUsingPost(
   body: API.AnnouncementsUpdateRequest,
   options?: { [key: string]: any }
 ) {
-  return request<API.BaseResponseboolean>('/api/announcements/update', {
+  return request<API.BaseResponseBoolean_>('/api/announcements/update', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

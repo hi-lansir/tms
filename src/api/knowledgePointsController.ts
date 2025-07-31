@@ -7,7 +7,7 @@ export async function addKnowledgePointsUsingPost(
   body: API.KnowledgePointsAddRequest,
   options?: { [key: string]: any }
 ) {
-  return request<API.BaseResponseint>('/api/knowledgePoints/add', {
+  return request<API.BaseResponseInt_>('/api/knowledgePoints/add', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -22,7 +22,7 @@ export async function deleteKnowledgePointsUsingPost(
   body: API.KnowledgePointsDeleteRequest,
   options?: { [key: string]: any }
 ) {
-  return request<API.BaseResponseboolean>('/api/knowledgePoints/delete', {
+  return request<API.BaseResponseBoolean_>('/api/knowledgePoints/delete', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -38,7 +38,7 @@ export async function getKnowledgePointsByIdUsingGet(
   params: API.getKnowledgePointsByIdUsingGETParams,
   options?: { [key: string]: any }
 ) {
-  return request<API.BaseResponseKnowledgePoints>('/api/knowledgePoints/get', {
+  return request<API.BaseResponseKnowledgePoints_>('/api/knowledgePoints/get', {
     method: 'GET',
     params: {
       ...params,
@@ -53,7 +53,7 @@ export async function getKnowledgePointsVoByIdUsingGet(
   params: API.getKnowledgePointsVOByIdUsingGETParams,
   options?: { [key: string]: any }
 ) {
-  return request<API.BaseResponseKnowledgePointsVO>('/api/knowledgePoints/get/vo', {
+  return request<API.BaseResponseKnowledgePointsVO_>('/api/knowledgePoints/get/vo', {
     method: 'GET',
     params: {
       ...params,
@@ -67,7 +67,7 @@ export async function listKnowledgePointsByPageUsingPost(
   body: API.KnowledgePointsQueryRequest,
   options?: { [key: string]: any }
 ) {
-  return request<API.BaseResponsePageKnowledgePoints>('/api/knowledgePoints/list/page', {
+  return request<API.BaseResponsePageKnowledgePoints_>('/api/knowledgePoints/list/page', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -82,7 +82,7 @@ export async function listKnowledgePointsVoByPageUsingPost(
   body: API.KnowledgePointsQueryRequest,
   options?: { [key: string]: any }
 ) {
-  return request<API.BaseResponsePageKnowledgePointsVO>('/api/knowledgePoints/list/page/vo', {
+  return request<API.BaseResponsePageKnowledgePointsVO_>('/api/knowledgePoints/list/page/vo', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -97,7 +97,7 @@ export async function updateKnowledgePointsUsingPost(
   body: API.KnowledgePointsUpdateRequest,
   options?: { [key: string]: any }
 ) {
-  return request<API.BaseResponseboolean>('/api/knowledgePoints/update', {
+  return request<API.BaseResponseBoolean_>('/api/knowledgePoints/update', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

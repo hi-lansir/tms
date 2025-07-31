@@ -7,7 +7,7 @@ export async function addDepartmentUsingPost(
   body: API.DepartmentsAddRequest,
   options?: { [key: string]: any }
 ) {
-  return request<API.BaseResponseint>('/api/departments/add', {
+  return request<API.BaseResponseInt_>('/api/departments/add', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -22,7 +22,7 @@ export async function deleteDepartmentUsingPost(
   body: API.DepartmentsDeleteRequest,
   options?: { [key: string]: any }
 ) {
-  return request<API.BaseResponseboolean>('/api/departments/delete', {
+  return request<API.BaseResponseBoolean_>('/api/departments/delete', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -34,8 +34,23 @@ export async function deleteDepartmentUsingPost(
 
 /** getAllDepartments GET /api/departments/getAll */
 export async function getAllDepartmentsUsingGet(options?: { [key: string]: any }) {
-  return request<API.BaseResponseListDepartments>('/api/departments/getAll', {
+  return request<API.BaseResponseListDepartments_>('/api/departments/getAll', {
     method: 'GET',
+    ...(options || {}),
+  })
+}
+
+/** getDeptByName GET /api/departments/getByName */
+export async function getDeptByNameUsingGet(
+  // 叠加生成的Param类型 (非body参数swagger默认没有生成对象)
+  params: API.getDeptByNameUsingGETParams,
+  options?: { [key: string]: any }
+) {
+  return request<API.BaseResponseDepartments_>('/api/departments/getByName', {
+    method: 'GET',
+    params: {
+      ...params,
+    },
     ...(options || {}),
   })
 }

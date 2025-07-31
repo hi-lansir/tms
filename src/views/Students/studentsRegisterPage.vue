@@ -58,7 +58,7 @@ const rules = {
     { required: true, message: '请输入密码' },
     { min: 6, message: '密码长度不能少于6个字符' },
     { max: 20, message: '密码长度不能超过20个字符' },
-    { pattern: /^(?=.*[a-zA-Z])(?=.*\d)[A-Za-z\d@$!%*?&]{8,20}$/, message: '密码必须包含字母、数字，只允许@$!%*?&' }
+    { pattern: /^(?=.*[a-zA-Z])(?=.*\d)[A-Za-z\d@$!%*?&]{6,20}$/, message: '密码必须包含字母、数字，只允许@$!%*?&特殊字符' }
   ],
   check_password: [
     { required: true, message: '请输入确认密码' },

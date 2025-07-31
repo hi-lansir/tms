@@ -6,8 +6,9 @@ import * as announcementsController from './announcementsController'
 import * as assignmentSubmissionsController from './assignmentSubmissionsController'
 import * as assignmentsController from './assignmentsController'
 import * as attendanceController from './attendanceController'
-import * as basicErrorController from './basicErrorController'
+import * as chapterProgressController from './chapterProgressController'
 import * as classesController from './classesController'
+import * as courseChaptersController from './courseChaptersController'
 import * as courseMaterialsController from './courseMaterialsController'
 import * as courseModulesController from './courseModulesController'
 import * as coursesController from './coursesController'
@@ -15,18 +16,22 @@ import * as departmentsController from './departmentsController'
 import * as enrollmentsController from './enrollmentsController'
 import * as forumPostsController from './forumPostsController'
 import * as knowledgePointsController from './knowledgePointsController'
-import * as quizzesController from './quizzesController'
 import * as quizzesQuestionsController from './quizzesQuestionsController'
+import * as quizzesController from './quizzesController'
+import * as rolesController from './rolesController'
+import * as staffRolesController from './staffRolesController'
 import * as staffController from './staffController'
-import * as studentActivityLogsController from './studentActivityLogsController'
+import * as studentCoursesController from './studentCoursesController'
 import * as studentsController from './studentsController'
+import * as studentActivityLogsController from './studentActivityLogsController'
 export default {
   announcementsController,
   assignmentSubmissionsController,
   assignmentsController,
   attendanceController,
-  basicErrorController,
+  chapterProgressController,
   classesController,
+  courseChaptersController,
   courseMaterialsController,
   courseModulesController,
   coursesController,
@@ -34,9 +39,12 @@ export default {
   enrollmentsController,
   forumPostsController,
   knowledgePointsController,
-  quizzesController,
   quizzesQuestionsController,
+  quizzesController,
+  rolesController,
+  staffRolesController,
   staffController,
-  studentActivityLogsController,
+  studentCoursesController,
   studentsController,
+  studentActivityLogsController,
 }

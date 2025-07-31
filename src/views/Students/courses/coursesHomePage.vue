@@ -85,7 +85,8 @@
 import { ref, computed, onMounted } from 'vue';
 import { Input, Select, Button, Tabs, Pagination, Row, Col, Empty } from 'ant-design-vue';
 import { SearchOutlined, CaretDownOutlined, CaretUpOutlined } from '@ant-design/icons-vue';
-import CourseCard from '@/components/CourseCard.vue';
+import CourseCard from '@/components/card/CourseCard.vue';
+import { listCoursesByPageUsingPost as listCourses } from '@/api/coursesController';
 
 // 课程接口定义
 interface Course {
@@ -121,6 +122,18 @@ const activeTabKey = ref('recommended');
 const currentPage = ref(1);
 const pageSize = ref(12);
 const allCourses = ref<Course[]>([]);
+
+// 获取后端数据
+onMounted(async () => {
+  try {
+    const res = await listCourses({ current: 1, pageSize: 1000 });
+    if (res.data.code === 0 && res.data.data) {
+      console.log(res.data.data);
+    }
+  } catch (error) {
+    console.error('获取课程列表失败', error);
+  }
+});
 
 // 模拟课程数据
 const generateMockCourses = (): Course[] => {

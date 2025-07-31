@@ -4,7 +4,7 @@ import request from '@/request'
 
 /** getLoginStaff POST /api/staff/get/login */
 export async function getLoginStaffUsingPost(options?: { [key: string]: any }) {
-  return request<API.BaseResponseLoginStaffVO>('/api/staff/get/login', {
+  return request<API.BaseResponseLoginStaffVO_>('/api/staff/get/login', {
     method: 'POST',
     ...(options || {}),
   })
@@ -15,7 +15,7 @@ export async function staffLoginUsingPost(
   body: API.StaffLoginRequest,
   options?: { [key: string]: any }
 ) {
-  return request<API.BaseResponseLoginStaffVO>('/api/staff/login', {
+  return request<API.BaseResponseLoginStaffVO_>('/api/staff/login', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -27,7 +27,7 @@ export async function staffLoginUsingPost(
 
 /** logout POST /api/staff/logout */
 export async function logoutUsingPost(options?: { [key: string]: any }) {
-  return request<API.BaseResponseboolean>('/api/staff/logout', {
+  return request<API.BaseResponseBoolean_>('/api/staff/logout', {
     method: 'POST',
     ...(options || {}),
   })
@@ -38,7 +38,7 @@ export async function staffRegisterUsingPost(
   body: API.StaffRegisterRequest,
   options?: { [key: string]: any }
 ) {
-  return request<API.BaseResponseint>('/api/staff/register', {
+  return request<API.BaseResponseInt_>('/api/staff/register', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

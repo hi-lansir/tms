@@ -9,7 +9,7 @@
       </a-col>
 
       <!-- 右侧用户信息 -->
-      <a-col v-if="userInfo?.student_number !== '空学号'">
+      <a-col v-if="isLoggedIn">
         <a-dropdown placement="bottomRight">
           <template #overlay>
             <a-menu style="width: 8em;" @click="handleMenuClick">
@@ -24,7 +24,7 @@
           </template>
           <div class="user-info" style="cursor: pointer;color: #fff;">
             <!-- <a-avatar :src="userInfo?.avatar || defaultAvatar" /> -->
-            <span style="margin-left: 8px;">{{ userInfo.student_number }}</span>
+            <span style="margin-left: 8px;">{{ userInfo?.staff_number || userInfo?.student_number }}</span>
             <DownOutlined style="margin-left: 4px; font-size: 12px;" />
           </div>
         </a-dropdown>
@@ -39,26 +39,38 @@ import { useRouter } from 'vue-router'
 import { Layout, Row, Col, Dropdown, Menu, Avatar, Icon, message } from 'ant-design-vue'
 import { UserOutlined, LogoutOutlined, DownOutlined } from '@ant-design/icons-vue'
 import { useLoginStudentStore } from '@/stores/useLoginStudentStore'
+import { useLoginStaffStore } from '@/stores/useLoginStaffStore'
 
 const { Header } = Layout
 const router = useRouter()
-const loginStore = useLoginStudentStore()
-const userInfo = computed(() => loginStore.loginStudents)
+const loginStudentStore = useLoginStudentStore()
+const loginStaffStore = useLoginStaffStore()
+const userInfo = computed(() => {
+  const isStaffRoute = router.currentRoute.value.path.includes('/staff')
+  return isStaffRoute ? loginStaffStore.staffInfo : loginStudentStore.studentInfo
+})
+const isLoggedIn = computed(() => {
+  return loginStaffStore.token || loginStudentStore.token
+})
 const defaultAvatar = 'https://gw.alipayobjects.com/zos/rmsportal/BiazfanxmamNRoxxVxka.png'
 
 // 用户信息通过computed从store实时获取，无需onMounted初始化
 
 const handleMenuClick = (e: any) => {
   if (e.key === 'logout') {
-    const res = loginStore.logoutLoginStudents()
-    if (res.success) {
+    const isStaff = router.currentRoute.value.path.includes('/staff')
+    if (isStaff) {
+      loginStaffStore.logout()
       message.success('退出登录成功')
-      router.push('/')
+      router.push('/staff/login')
     } else {
-      message.error('退出登录失败')
+      loginStudentStore.logoutLoginStudents()
+      message.success('退出登录成功')
+      router.push('/student/login')
     }
   } else if (e.key === 'userInfo') {
-    router.push('/student/info')
+    const path = router.currentRoute.value.path.includes('/staff') ? '/staff/info' : '/student/info'
+    router.push(path)
   }
 }
 </script>

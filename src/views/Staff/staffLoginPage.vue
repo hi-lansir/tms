@@ -2,7 +2,7 @@
   <a-card id="staffLoginPage">
     <h2 class="title">教职工登录</h2>
     <div class="desc">教学与仿真实训平台</div>
-    <a-form :model="formState" name="basic" autocomplete="off" @finish="handleSubmit">
+    <a-form :model="formState" name="basic" autocomplete="off" :label-col="labelCol" @finish="handleSubmit">
       <a-form-item label="用户名" name="staff_number" :rules="[{ required: true, message: '请输入用户名' }]">
         <a-input v-model:value="formState.staff_number" placeholder="请输入用户名" />
       </a-form-item>
@@ -32,6 +32,11 @@ const formState = reactive<API.StaffLoginRequest>({
   password_hash: '',
 })
 
+// 用于接受表单输入的值
+const labelCol = {
+  span: 4,
+}
+
 const loginStaffStore = useLoginStaffStore()
 
 /**
@@ -44,7 +49,11 @@ const handleSubmit = async (values: any) => {
   if (res.data.code === 0 && res.data.data) {
     // 存储Token
     const token = res.data.data.token;
-    loginStaffStore.setToken(token);
+    const tokenName = res.data.data.tokenName;
+    console.log("Token:", token);
+    if (token && tokenName) {
+      loginStaffStore.setToken(token, tokenName);
+    }
     await loginStaffStore.fetchLoginStaff()
     message.success('登录成功')
 
@@ -52,12 +61,26 @@ const handleSubmit = async (values: any) => {
     const redirectParam = new URLSearchParams(window.location.search).get('redirect') || '/staff'
     let redirectPath = redirectParam
 
+    console.log("Redirect Path:", redirectPath)
     // 如果是完整URL，提取路径部分
     try {
       const url = new URL(redirectParam)
       redirectPath = url.pathname + url.search
     } catch (e) {
       // 不是完整URL，直接使用
+    }
+    // 检查是否为不需要重定向的路径（登录或引导页）
+    const excludedPaths = ['/', '/login', '/register'];
+    try {
+      const parsedUrl = new URL(redirectPath, window.location.origin);
+      if (excludedPaths.includes(parsedUrl.pathname)) {
+        redirectPath = '/staff';
+      }
+    } catch (e) {
+      // 如果解析失败，直接检查路径是否在排除列表中
+      if (excludedPaths.includes(redirectPath)) {
+        redirectPath = '/staff';
+      }
     }
 
     router.push(redirectPath)

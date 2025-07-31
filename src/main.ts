@@ -5,6 +5,7 @@ import 'ant-design-vue/dist/reset.css'
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
 import { useLoginStudentStore } from './stores/useLoginStudentStore'
+import { useLoginStaffStore } from './stores/useLoginStaffStore'
 
 const app = createApp(App)
 app.use(Antd)
@@ -15,5 +16,8 @@ app.use(router)
 // 初始化时恢复登录状态
 const loginStudentStore = useLoginStudentStore()
 loginStudentStore.fetchLoginStudents()
+
+const loginStaffStore = useLoginStaffStore()
+loginStaffStore.fetchLoginStaff()
 
 app.mount('#app')

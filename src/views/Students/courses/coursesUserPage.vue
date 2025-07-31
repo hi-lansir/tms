@@ -15,7 +15,7 @@
     <div class="course-list">
       <a-row :gutter="[24, 24]">
         <a-col :xs="24" :sm="12" :lg="8" :xl="6" v-for="course in filteredCourses" :key="course.id">
-          <div class="course-card">
+          <div class="course-card" @click="handleCourseClick(course)">
             <div class="course-cover">
               <img :src="course.coverImage" alt="{{ course.title }}" class="cover-img" />
               <span v-if="course.isCompleted" class="completed-badge">已完成</span>
@@ -45,6 +45,7 @@
 import { ref, computed } from 'vue';
 import { SyncOutlined } from '@ant-design/icons-vue';
 import type { Course } from '@/api/typings';
+import router from '@/router';
 
 // 课程状态标签
 const activeStatus = ref<string>('all');
@@ -116,6 +117,11 @@ const filteredCourses = computed<Course[]>(() => {
       return userCourses.value;
   }
 });
+
+// 处理课程点击事件
+const handleCourseClick = (course: Course) => {
+  router.push(`/student/courses/study/${course.id}`);
+};
 
 // 处理状态切换
 const handleStatusChange = () => {

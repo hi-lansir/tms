@@ -46,8 +46,11 @@ const router = createRouter({
         },
         {
           path: 'courses/details/:id',
-          name: '课程详情',
+          name: 'studentCoursesDetails',
           component: () => import('@/views/Students/courses/coursesDetailsPage.vue'),
+          meta: {
+            title: '课程详情',
+          },
         },
         {
           path: 'courses/study/:id',
@@ -58,6 +61,34 @@ const router = createRouter({
           path: 'courses/user',
           name: '学生课程',
           component: studentsCoursesUserPage,
+        },
+        {
+          path: 'exams/practice',
+          name: '练习',
+          component: () => import('@/views/Students/exams/examPracticePage.vue'),
+        },
+        {
+          path: 'exams/schedule',
+          name: 'studentExamSchedule',
+          component: () => import('@/views/Students/exams/examSchedulePage.vue'),
+          meta: {
+            title: '考试安排',
+          },
+        },
+        {
+          path: 'exams/taking/:id',
+          name: '考试',
+          component: () => import('@/views/Students/exams/examTakingPage.vue'),
+        },
+        {
+          path: 'exams/results',
+          name: '考试成绩',
+          component: () => import('@/views/Students/exams/examResultsPage.vue'),
+        },
+        {
+          path: 'knowledge',
+          name: '知识',
+          component: () => import('@/views/Students/knowledge/knowledgeBrowsePage.vue'),
         },
       ],
     },
@@ -81,6 +112,11 @@ const router = createRouter({
           path: '',
           name: '教职工首页',
           component: () => import('@/views/Staff/staffHomePage.vue'),
+        },
+        {
+          path: 'courses/create',
+          name: '课程创建',
+          component: () => import('@/views/Staff/courses/courseCreatePage.vue'),
         },
       ],
     },

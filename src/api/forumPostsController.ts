@@ -7,7 +7,7 @@ export async function addForumPostsUsingPost(
   body: API.ForumPostsAddRequest,
   options?: { [key: string]: any }
 ) {
-  return request<API.BaseResponseint>('/api/forumPosts/add', {
+  return request<API.BaseResponseInt_>('/api/forumPosts/add', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -22,7 +22,7 @@ export async function deleteForumPostsUsingPost(
   body: API.ForumPostsDeleteRequest,
   options?: { [key: string]: any }
 ) {
-  return request<API.BaseResponseboolean>('/api/forumPosts/delete', {
+  return request<API.BaseResponseBoolean_>('/api/forumPosts/delete', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -38,7 +38,7 @@ export async function getForumPostsByIdUsingGet(
   params: API.getForumPostsByIdUsingGETParams,
   options?: { [key: string]: any }
 ) {
-  return request<API.BaseResponseForumPosts>('/api/forumPosts/get', {
+  return request<API.BaseResponseForumPosts_>('/api/forumPosts/get', {
     method: 'GET',
     params: {
       ...params,
@@ -53,7 +53,7 @@ export async function getForumPostsVoByIdUsingGet(
   params: API.getForumPostsVOByIdUsingGETParams,
   options?: { [key: string]: any }
 ) {
-  return request<API.BaseResponseForumPostsVO>('/api/forumPosts/get/vo', {
+  return request<API.BaseResponseForumPostsVO_>('/api/forumPosts/get/vo', {
     method: 'GET',
     params: {
       ...params,
@@ -67,7 +67,7 @@ export async function listForumPostsByPageUsingPost(
   body: API.ForumPostsQueryRequest,
   options?: { [key: string]: any }
 ) {
-  return request<API.BaseResponsePageForumPosts>('/api/forumPosts/list/page', {
+  return request<API.BaseResponsePageForumPosts_>('/api/forumPosts/list/page', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -82,7 +82,7 @@ export async function listForumPostsVoByPageUsingPost(
   body: API.ForumPostsQueryRequest,
   options?: { [key: string]: any }
 ) {
-  return request<API.BaseResponsePageForumPostsVO>('/api/forumPosts/list/page/vo', {
+  return request<API.BaseResponsePageForumPostsVO_>('/api/forumPosts/list/page/vo', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -97,7 +97,7 @@ export async function updateForumPostsUsingPost(
   body: API.ForumPostsUpdateRequest,
   options?: { [key: string]: any }
 ) {
-  return request<API.BaseResponseboolean>('/api/forumPosts/update', {
+  return request<API.BaseResponseBoolean_>('/api/forumPosts/update', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

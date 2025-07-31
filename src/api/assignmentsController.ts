@@ -7,7 +7,7 @@ export async function addAssignmentsUsingPost(
   body: API.AssignmentsAddRequest,
   options?: { [key: string]: any }
 ) {
-  return request<API.BaseResponseint>('/api/assignments/add', {
+  return request<API.BaseResponseInt_>('/api/assignments/add', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -22,7 +22,7 @@ export async function deleteAssignmentsUsingPost(
   body: API.AssignmentsDeleteRequest,
   options?: { [key: string]: any }
 ) {
-  return request<API.BaseResponseboolean>('/api/assignments/delete', {
+  return request<API.BaseResponseBoolean_>('/api/assignments/delete', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -38,7 +38,7 @@ export async function getAssignmentsByIdUsingGet(
   params: API.getAssignmentsByIdUsingGETParams,
   options?: { [key: string]: any }
 ) {
-  return request<API.BaseResponseAssignments>('/api/assignments/get', {
+  return request<API.BaseResponseAssignments_>('/api/assignments/get', {
     method: 'GET',
     params: {
       ...params,
@@ -53,7 +53,7 @@ export async function getAssignmentsVoByIdUsingGet(
   params: API.getAssignmentsVOByIdUsingGETParams,
   options?: { [key: string]: any }
 ) {
-  return request<API.BaseResponseAssignmentsVO>('/api/assignments/get/vo', {
+  return request<API.BaseResponseAssignmentsVO_>('/api/assignments/get/vo', {
     method: 'GET',
     params: {
       ...params,
@@ -67,7 +67,7 @@ export async function listAssignmentsByPageUsingPost(
   body: API.AssignmentsQueryRequest,
   options?: { [key: string]: any }
 ) {
-  return request<API.BaseResponsePageAssignments>('/api/assignments/list/page', {
+  return request<API.BaseResponsePageAssignments_>('/api/assignments/list/page', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -82,7 +82,7 @@ export async function listAssignmentsVoByPageUsingPost(
   body: API.AssignmentsQueryRequest,
   options?: { [key: string]: any }
 ) {
-  return request<API.BaseResponsePageAssignmentsVO>('/api/assignments/list/page/vo', {
+  return request<API.BaseResponsePageAssignmentsVO_>('/api/assignments/list/page/vo', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -97,7 +97,7 @@ export async function updateAssignmentsUsingPost(
   body: API.AssignmentsUpdateRequest,
   options?: { [key: string]: any }
 ) {
-  return request<API.BaseResponseboolean>('/api/assignments/update', {
+  return request<API.BaseResponseBoolean_>('/api/assignments/update', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

@@ -7,7 +7,7 @@ export async function addQuizQuestionsUsingPost(
   body: API.QuizQuestionsAddRequest,
   options?: { [key: string]: any }
 ) {
-  return request<API.BaseResponseint>('/api/quizQuestions/add', {
+  return request<API.BaseResponseInt_>('/api/quizQuestions/add', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -22,7 +22,7 @@ export async function deleteQuizQuestionsUsingPost(
   body: API.QuizQuestionsDeleteRequest,
   options?: { [key: string]: any }
 ) {
-  return request<API.BaseResponseboolean>('/api/quizQuestions/delete', {
+  return request<API.BaseResponseBoolean_>('/api/quizQuestions/delete', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -38,7 +38,7 @@ export async function getQuizQuestionsByIdUsingGet(
   params: API.getQuizQuestionsByIdUsingGETParams,
   options?: { [key: string]: any }
 ) {
-  return request<API.BaseResponseQuizQuestions>('/api/quizQuestions/get', {
+  return request<API.BaseResponseQuizQuestions_>('/api/quizQuestions/get', {
     method: 'GET',
     params: {
       ...params,
@@ -53,7 +53,7 @@ export async function getQuizQuestionsVoByIdUsingGet(
   params: API.getQuizQuestionsVOByIdUsingGETParams,
   options?: { [key: string]: any }
 ) {
-  return request<API.BaseResponseQuizQuestionsVO>('/api/quizQuestions/get/vo', {
+  return request<API.BaseResponseQuizQuestionsVO_>('/api/quizQuestions/get/vo', {
     method: 'GET',
     params: {
       ...params,
@@ -67,7 +67,7 @@ export async function listQuizQuestionsByPageUsingPost(
   body: API.QuizQuestionsQueryRequest,
   options?: { [key: string]: any }
 ) {
-  return request<API.BaseResponsePageQuizQuestions>('/api/quizQuestions/list/page', {
+  return request<API.BaseResponsePageQuizQuestions_>('/api/quizQuestions/list/page', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -82,7 +82,7 @@ export async function listQuizQuestionsVoByPageUsingPost(
   body: API.QuizQuestionsQueryRequest,
   options?: { [key: string]: any }
 ) {
-  return request<API.BaseResponsePageQuizQuestionsVO>('/api/quizQuestions/list/page/vo', {
+  return request<API.BaseResponsePageQuizQuestionsVO_>('/api/quizQuestions/list/page/vo', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -97,7 +97,7 @@ export async function updateQuizQuestionsUsingPost(
   body: API.QuizQuestionsUpdateRequest,
   options?: { [key: string]: any }
 ) {
-  return request<API.BaseResponseboolean>('/api/quizQuestions/update', {
+  return request<API.BaseResponseBoolean_>('/api/quizQuestions/update', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

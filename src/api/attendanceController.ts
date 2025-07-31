@@ -7,7 +7,7 @@ export async function addAttendanceUsingPost(
   body: API.AttendanceAddRequest,
   options?: { [key: string]: any }
 ) {
-  return request<API.BaseResponseint>('/api/attendance/add', {
+  return request<API.BaseResponseInt_>('/api/attendance/add', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -22,7 +22,7 @@ export async function deleteAttendanceUsingPost(
   body: API.AttendanceDeleteRequest,
   options?: { [key: string]: any }
 ) {
-  return request<API.BaseResponseboolean>('/api/attendance/delete', {
+  return request<API.BaseResponseBoolean_>('/api/attendance/delete', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -38,7 +38,7 @@ export async function getAttendanceByIdUsingGet(
   params: API.getAttendanceByIdUsingGETParams,
   options?: { [key: string]: any }
 ) {
-  return request<API.BaseResponseAttendance>('/api/attendance/get', {
+  return request<API.BaseResponseAttendance_>('/api/attendance/get', {
     method: 'GET',
     params: {
       ...params,
@@ -53,7 +53,7 @@ export async function getAttendanceVoByIdUsingGet(
   params: API.getAttendanceVOByIdUsingGETParams,
   options?: { [key: string]: any }
 ) {
-  return request<API.BaseResponseAttendanceVO>('/api/attendance/get/vo', {
+  return request<API.BaseResponseAttendanceVO_>('/api/attendance/get/vo', {
     method: 'GET',
     params: {
       ...params,
@@ -67,7 +67,7 @@ export async function listAttendanceByPageUsingPost(
   body: API.AttendanceQueryRequest,
   options?: { [key: string]: any }
 ) {
-  return request<API.BaseResponsePageAttendance>('/api/attendance/list/page', {
+  return request<API.BaseResponsePageAttendance_>('/api/attendance/list/page', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -82,7 +82,7 @@ export async function listAttendanceVoByPageUsingPost(
   body: API.AttendanceQueryRequest,
   options?: { [key: string]: any }
 ) {
-  return request<API.BaseResponsePageAttendanceVO>('/api/attendance/list/page/vo', {
+  return request<API.BaseResponsePageAttendanceVO_>('/api/attendance/list/page/vo', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -97,7 +97,7 @@ export async function updateAttendanceUsingPost(
   body: API.AttendanceUpdateRequest,
   options?: { [key: string]: any }
 ) {
-  return request<API.BaseResponseboolean>('/api/attendance/update', {
+  return request<API.BaseResponseBoolean_>('/api/attendance/update', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

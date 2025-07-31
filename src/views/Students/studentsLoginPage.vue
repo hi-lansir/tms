@@ -22,19 +22,42 @@
   </a-card>
 </template>
 <script lang="ts" setup>
-import { reactive } from 'vue'
+import { reactive, onMounted } from 'vue'
 import { message } from 'ant-design-vue'
 import router from '@/router'
 import { useLoginStudentStore } from '@/stores/useLoginStudentStore.ts'
-import { studentsLoginUsingPost as studentsLogin } from '@/api/studentsController.ts' // 用于接受表单输入的值
+import { studentsLoginUsingPost as studentsLogin, generateCaptchaUsingGet } from '@/api/studentsController.ts' // 用于接受表单输入的值
 
 // 用于接受表单输入的值
 const formState = reactive<API.StudentsLoginRequest>({
   student_number: '',
   password_hash: '',
+  captcha: '',
+  captcha_key: ''
 })
 
 const loginStudentStore = useLoginStudentStore()
+
+const handleCaptcha = async () => {
+  const res = await generateCaptchaUsingGet()
+  if (res.data.code === 0 && res.data.data) {
+    console.log(res.data.data)
+    formState.captcha_key = res.data.data.captchaKey
+    formState.captcha = res.data.data.captchaCode
+  } else {
+  }
+}
+
+// 页面加载时检查登录状态
+onMounted(() => {
+  const token = loginStudentStore.token;
+  if (token) {
+    message.info('您已登录，正在跳转到首页...')
+    router.push('/student')
+  }
+  //加载验证码
+  handleCaptcha()
+})
 
 /**
  * 提交表单
@@ -46,9 +69,11 @@ const handleSubmit = async (values: any) => {
   if (res.data.code === 0 && res.data.data) {
 
     // 新增：从响应中提取 Token 并存储
-    const token = res.data.data.token; // 假设返回数据结构包含 token 字段
-    console.log("Token:", token);
-    loginStudentStore.setToken(token);
+    const token = res.data.data.token;
+    const tokenName = res.data.data.tokenName;
+    if (token && tokenName) {
+      loginStudentStore.setToken(token, tokenName);
+    }
 
     await loginStudentStore.fetchLoginStudents()
     message.success('登录成功')
@@ -61,8 +86,23 @@ const handleSubmit = async (values: any) => {
     try {
       const url = new URL(redirectParam)
       redirectPath = url.pathname + url.search
+      console.log(url, redirectPath)
     } catch (e) {
       // 不是完整URL，直接使用
+    }
+
+    // 检查是否为不需要重定向的路径（登录或引导页）
+    const excludedPaths = ['/', '/login', '/register'];
+    try {
+      const parsedUrl = new URL(redirectPath, window.location.origin);
+      if (excludedPaths.includes(parsedUrl.pathname)) {
+        redirectPath = '/student';
+      }
+    } catch (e) {
+      // 如果解析失败，直接检查路径是否在排除列表中
+      if (excludedPaths.includes(redirectPath)) {
+        redirectPath = '/student';
+      }
     }
 
     router.push(redirectPath)

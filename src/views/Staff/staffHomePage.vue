@@ -1,185 +1,131 @@
 <template>
-  <a-layout class="staff-home-page">
-    <a-layout-content class="content">
-      <div class="page-header">
-        <h1>欢迎使用教学管理系统</h1>
-        <p>教职工工作平台</p>
-      </div>
+  <div class="staff-home">
+    <!-- 页面标题 -->
+    <h1>教师首页</h1>
 
-      <a-row :gutter="[16, 16]" class="statistics-row">
-        <a-col :xs="24" :sm="12" :lg="6">
-          <a-card class="stat-card" hoverable>
-            <div class="stat-content">
-              <div class="stat-title">学生总数</div>
-              <div class="stat-value">128</div>
-              <div class="stat-desc">较上月增长 12%</div>
-            </div>
-          </a-card>
+    <!-- 统计卡片区域 -->
+    <a-row :gutter="16">
+      <a-col :span="8">
+        <a-card title="课程管理" bordered>
+          <a-statistic title="课程总数" :value="courseCount" />
+          <a-button type="primary" style="margin-top: 16px">查看详情</a-button>
+        </a-card>
+      </a-col>
+      <a-col :span="8">
+        <a-card title="学生管理" bordered>
+          <a-statistic title="学生总数" :value="studentCount" />
+          <a-button type="primary" style="margin-top: 16px">查看详情</a-button>
+        </a-card>
+      </a-col>
+      <a-col :span="8">
+        <a-card title="考试管理" bordered>
+          <a-statistic title="考试总数" :value="examCount" />
+          <a-button type="primary" style="margin-top: 16px">查看详情</a-button>
+        </a-card>
+      </a-col>
+    </a-row>
+
+    <!-- 图表区域 -->
+    <a-row :gutter="16" style="margin-top: 20px">
+      <a-col :span="12">
+        <a-card title="课程学生分布" bordered>
+          <ECharts :option="courseStudentOption" style="height: 300px" />
+        </a-card>
+      </a-col>
+      <a-col :span="12">
+        <a-card title="考试通过率趋势" bordered>
+          <ECharts :option="examPassRateOption" style="height: 300px" />
+        </a-card>
+      </a-col>
+    </a-row>
+
+    <!-- 快速访问入口 -->
+    <div style="margin-top: 20px">
+      <h2>快速访问</h2>
+      <a-row :gutter="16" style="margin-top: 10px">
+        <a-col :span="4">
+          <a-button type="primary" block>创建课程</a-button>
         </a-col>
-        <a-col :xs="24" :sm="12" :lg="6">
-          <a-card class="stat-card" hoverable>
-            <div class="stat-content">
-              <div class="stat-title">课程数量</div>
-              <div class="stat-value">24</div>
-              <div class="stat-desc">本学期开设课程</div>
-            </div>
-          </a-card>
+        <a-col :span="4">
+          <a-button type="primary" block>添加学生</a-button>
         </a-col>
-        <a-col :xs="24" :sm="12" :lg="6">
-          <a-card class="stat-card" hoverable>
-            <div class="stat-content">
-              <div class="stat-title">待处理作业</div>
-              <div class="stat-value">16</div>
-              <div class="stat-desc">需要批阅的作业</div>
-            </div>
-          </a-card>
+        <a-col :span="4">
+          <a-button type="primary" block>创建考试</a-button>
         </a-col>
-        <a-col :xs="24" :sm="12" :lg="6">
-          <a-card class="stat-card" hoverable>
-            <div class="stat-content">
-              <div class="stat-title">近期考试</div>
-              <div class="stat-value">3</div>
-              <div class="stat-desc">未来7天内</div>
-            </div>
-          </a-card>
+        <a-col :span="4">
+          <a-button type="primary" block>查看考勤</a-button>
+        </a-col>
+        <a-col :span="4">
+          <a-button type="primary" block>发布公告</a-button>
+        </a-col>
+        <a-col :span="4">
+          <a-button type="primary" block>课程资料</a-button>
         </a-col>
       </a-row>
-
-      <a-row :gutter="[16, 16]" class="quick-actions-row">
-        <a-col :xs="24" :sm="12" :lg="8">
-          <a-card class="action-card" hoverable @click="$router.push('/staff/courses/create')">
-            <div class="action-content">
-              <BookOutlined class="action-icon" />
-              <div class="action-text">
-                <div class="action-title">创建新课程</div>
-                <div class="action-desc">添加新的课程信息和教学内容</div>
-              </div>
-            </div>
-          </a-card>
-        </a-col>
-        <a-col :xs="24" :sm="12" :lg="8">
-          <a-card class="action-card" hoverable @click="$router.push('/staff/students/list')">
-            <div class="action-content">
-              <TeamOutlined class="action-icon" />
-              <div class="action-text">
-                <div class="action-title">学生管理</div>
-                <div class="action-desc">查看和管理学生信息</div>
-              </div>
-            </div>
-          </a-card>
-        </a-col>
-        <a-col :xs="24" :sm="12" :lg="8">
-          <a-card class="action-card" hoverable @click="$router.push('/staff/exams')">
-            <div class="action-content">
-              <FileTextOutlined class="action-icon" />
-              <div class="action-text">
-                <div class="action-title">考试安排</div>
-                <div class="action-desc">创建和管理考试</div>
-              </div>
-            </div>
-          </a-card>
-        </a-col>
-      </a-row>
-    </a-layout-content>
-  </a-layout>
+    </div>
+  </div>
 </template>
 
-<script lang="ts" setup>
-import { BookOutlined, TeamOutlined, FileTextOutlined } from '@ant-design/icons-vue';
+<script setup lang="ts">
+import { ref } from 'vue';
+import { Row as ARow, Col as ACol, Card as ACard, Statistic as AStatistic, Button as AButton } from 'ant-design-vue';
+import ECharts from 'vue-echarts';
+import { use } from 'echarts/core';
+import { BarChart, LineChart } from 'echarts/charts';
+import { GridComponent, TooltipComponent, LegendComponent } from 'echarts/components';
+import { CanvasRenderer } from 'echarts/renderers';
+
+// 注册echarts组件
+use([BarChart, LineChart, GridComponent, TooltipComponent, LegendComponent, CanvasRenderer]);
+
+// 模拟数据
+const courseCount = ref(12);
+const studentCount = ref(245);
+const examCount = ref(8);
+
+// 课程学生分布图表配置
+const courseStudentOption = ref({
+  xAxis: {
+    type: 'category',
+    data: ['数学', '物理', '化学', '生物', '英语', '历史']
+  },
+  yAxis: {
+    type: 'value'
+  },
+  series: [
+    {
+      data: [32, 45, 28, 36, 52, 24],
+      type: 'bar'
+    }
+  ]
+});
+
+// 考试通过率趋势图表配置
+const examPassRateOption = ref({
+  xAxis: {
+    type: 'category',
+    data: ['第1周', '第2周', '第3周', '第4周', '第5周', '第6周']
+  },
+  yAxis: {
+    type: 'value',
+    max: 100
+  },
+  series: [
+    {
+      data: [85, 92, 78, 90, 88, 95],
+      type: 'line'
+    }
+  ]
+});
 </script>
 
 <style scoped>
-.staff-home-page {
-  min-height: 100vh;
+.staff-home {
+  padding: 20px;
 }
 
-.content {
-  margin: 24px 16px;
-  padding: 24px;
-  background: #fff;
-  min-height: 280px;
-}
-
-.page-header {
-  margin-bottom: 24px;
-  padding-bottom: 16px;
-  border-bottom: 1px solid #e8e8e8;
-}
-
-.page-header h1 {
-  margin-bottom: 8px;
-  color: rgba(0, 0, 0, 0.85);
-  font-weight: 600;
-  font-size: 24px;
-}
-
-.page-header p {
-  color: rgba(0, 0, 0, 0.65);
-  font-size: 14px;
-}
-
-.statistics-row {
-  margin-bottom: 24px;
-}
-
-.stat-card {
-  height: 100%;
-  transition: all 0.3s;
-}
-
-.stat-content {
-  padding: 16px;
-}
-
-.stat-title {
-  margin-bottom: 8px;
-  color: rgba(0, 0, 0, 0.65);
-  font-size: 14px;
-}
-
-.stat-value {
-  margin-bottom: 4px;
-  color: rgba(0, 0, 0, 0.85);
-  font-size: 24px;
-  font-weight: 600;
-}
-
-.stat-desc {
-  color: #52c41a;
-  font-size: 14px;
-}
-
-.action-card {
-  height: 100%;
-  cursor: pointer;
-  transition: all 0.3s;
-}
-
-.action-card:hover {
-  border-color: #1890ff;
-}
-
-.action-content {
-  display: flex;
-  align-items: center;
-  padding: 24px;
-}
-
-.action-icon {
-  margin-right: 16px;
-  color: #1890ff;
-  font-size: 24px;
-}
-
-.action-title {
-  margin-bottom: 4px;
-  color: rgba(0, 0, 0, 0.85);
-  font-weight: 500;
-  font-size: 16px;
-}
-
-.action-desc {
-  color: rgba(0, 0, 0, 0.65);
-  font-size: 14px;
+h1,
+h2 {
+  margin-bottom: 16px;
 }
 </style>
